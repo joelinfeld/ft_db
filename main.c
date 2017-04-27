@@ -3,13 +3,22 @@
 #include <string.h>
 #include <unistd.h>
 
+//union that contains cell data, currently either int or str.
+typedef union 	u_data
+{
+	int i;
+	char str[100];
+}				t_data;
+
+//struct of cell that containts a u_data as well as metadata of the field and data type contained in the cell
 typedef struct	s_cell
 {
 	char		*field_name;
 	char		*type;
-	char		*value;//union?
+	t_data		value;//union?
 }				t_cell;
 
+//table_data struct contains all table meta data
 typedef struct	s_table_data
 {
 	char		*name;
@@ -18,17 +27,15 @@ typedef struct	s_table_data
 	t_cell		*fields;
 }				t_table_data;
 
+//table that consits of a 2D cell array and a table data struct.
 typedef struct		s_table
 {
 	t_table_data 	table_data;
-	t_cell			**rows;
+	t_cell			rows[2][2];
 }					t_table;
 
-
-
-
-
-char	*ft_serialize_table_data(t_table_data td)//need to include row_count
+//this serializes a table data struct, creates the first line of a serialized file
+void		ft_serialize_table_data(t_table_data td)//need to include row_count
 {
 	FILE	*fp;
 	int i;
@@ -46,20 +53,42 @@ char	*ft_serialize_table_data(t_table_data td)//need to include row_count
 	fprintf(fp, "},");
 	fprintf(fp, "%d\n", td.row_count);
 	fclose(fp);
-	return (0);
 }
 
+//this function will be used to determine which print based on data type contained in cells
+void		typrint(char *type, t_data value, FILE *fp)
+{
+	if (*type == 'i')
+		fprintf(fp, "%d,", value.i);
+	else if (*type == 's')
+		fprintf(fp, "%lu:\"%s\",", strlen(value.str), value.str);
+}
 
+//this serializes all rows contained in a table, should never be called before ft_serialize_table_data
+void		ft_serialize_rows(t_table tab)
+{
+	FILE	*fp;
+	int		i;
+	int		k;
 
-
-	
-
-
-
-
-
+	fp = fopen(tab.table_data.name, "a");
+	i = 0;
+	while (i < tab.table_data.row_count)
+	{
+		k = 0;
+		while (k < tab.table_data.col_count)
+		{
+			typrint(tab.rows[i][k].type, tab.rows[i][k].value, fp);
+			k++;
+		}
+		fprintf(fp, "\n");
+		i++;
+	}
+	fclose(fp);
+}
 
 /*
+**these functions allow for user input to create a new table, crating rows not yet functional.
 int		ft_create_table(void)
 {
 	FILE	*fp;
@@ -133,12 +162,13 @@ int main(void)
 	}
 */
 
+//this is all haphazard code to rig together one table with two rows for testing serialization algorithm
 	t_table_data td;
 	
 	td.name = (char*)malloc(5);
 	strcpy(td.name, "test");
 	td.col_count = 2;
-	td.row_count = 0;
+	td.row_count = 2;
 
 	td.fields = (t_cell*)malloc(sizeof(t_cell) * 2);
 
@@ -158,8 +188,22 @@ int main(void)
 
 	ft_serialize_table_data(td);
 
+	t_table tab;
+	tab.table_data = td;
+	tab.rows[0][0].value.i = 2;
+	tab.rows[0][0].type = (char*)malloc(2);
+	strcpy(tab.rows[0][0].type, "i");
+	tab.rows[0][1].type = (char*)malloc(2);
+	strcpy(tab.rows[0][1].type, "s");
+	strcpy(tab.rows[0][1].value.str, "bj");
+	tab.rows[1][0].value.i = 2;
+	tab.rows[1][0].type = (char*)malloc(2);
+	strcpy(tab.rows[1][0].type, "i");
+	tab.rows[1][1].type = (char*)malloc(2);
+	strcpy(tab.rows[1][1].type, "s");
+	strcpy(tab.rows[1][1].value.str, "bj");
 
-
+	ft_serialize_rows(tab);
 
 	return (0);
 }
