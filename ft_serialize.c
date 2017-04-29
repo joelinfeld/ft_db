@@ -25,12 +25,14 @@ void		ft_serialize_table_data(FILE *fp, t_table tab)
 
 
 //this function will be used to determine which print based on data type contained in cells
-void		ft_typrint(char *type, t_data value, FILE *fp)
+void		ft_typrint(char *type, t_data *value, FILE *fp)
 {
-	if (*type == 'i')
-		fprintf(fp, "%d,", value.i);
-	else if (*type == 's')
-		fprintf(fp, "%lu:\"%s\",", strlen(value.str), value.str);
+	if (!value)
+		fprintf(fp, "%c,", '~');
+	else if (ft_strequ(type, "int"))
+		fprintf(fp, "%d,", value->i);
+	else if (ft_strequ(type, "str"))
+		fprintf(fp, "%lu:\"%s\",", strlen(value->str), value->str);
 }
 
 

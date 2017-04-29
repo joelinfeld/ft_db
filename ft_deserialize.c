@@ -25,9 +25,9 @@ t_field *ft_get_table_fields(char *field_data, int col_count)
 
 		field_data = ft_strchr(field_data, '\"') + 1;
 		fields[i].name = ft_strndup(field_data, len);
-		field_data = ft_strchr(field_data, '\"') + 4;
-		fields[i].type = ft_strndup(field_data, 1);
-		field_data++;
+		field_data = ft_strchr(field_data, '\"') + 2;
+		fields[i].type = ft_strndup(field_data, 3);
+		field_data += 3;
 		i++;
 	}
 	return (fields);
@@ -48,18 +48,21 @@ t_table	ft_deserialize_table_data(FILE *fp)
 	return (tab);
 }
 
-t_data	ft_get_value(FILE *fp, char *type, char *cell_str)
+t_data	*ft_get_value(FILE *fp, char *type, char *cell_str)
 {
-	t_data	value;
-	int len;
+	t_data	*value;
+	int 	len;
 
-	if (*type == 'i')
-		value.i = ft_atoi(cell_str);
-	else if (*type == 's')
+	if (*cell_str == '~')
+		return (NULL);
+	value = (t_data*)ft_malloc(sizeof(t_data));
+	if (ft_strequ(type, "int"))
+		value->i = ft_atoi(cell_str);
+	else if (ft_strequ(type, "str"))
 	{
 		len = ft_atoi(cell_str);
 		cell_str = ft_strchr(cell_str, '\"') + 1;
-		value.str = ft_strndup(cell_str, len);
+		value->str = ft_strndup(cell_str, len);
 	}
 	return (value);
 }

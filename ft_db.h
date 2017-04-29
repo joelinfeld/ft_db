@@ -13,7 +13,6 @@ typedef union 	u_data
 {
 	int 	i;
 	char 	*str;
-	double	d;
 }				t_data;
 
 //struct that contains metadata of the fields in a table
@@ -28,7 +27,7 @@ typedef struct	s_cell
 {
 	char		*field;//are these needed?
 	char		*type;//are these needed?
-	t_data		value;
+	t_data		*value;
 }				t_cell;
 
 //table that consits of a 2D cell array and a table data struct.
@@ -50,5 +49,8 @@ t_table	ft_deserialize_table(char *table_name);
 void	ft_create_table(void);
 void	ft_insert_into(void);
 void	ft_select(void);
+int		ft_parse_table_name(char *buffer, char **name);
+
+int		*ft_get_col_indices(char **fields_arr, int field_count, t_table tab);
 
 #endif
