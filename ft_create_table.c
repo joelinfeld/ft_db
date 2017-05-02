@@ -29,7 +29,7 @@ void	ft_create_table(void)
 	ft_serialize_table(tab);
 }
 */
-
+/*
 int	ft_parse_table_name(char *buffer, char **name)
 {	
 	if (!ft_strchr(buffer, '('))
@@ -47,44 +47,9 @@ int	ft_parse_table_name(char *buffer, char **name)
 	buffer[ft_strlen(buffer)] = '(';
 	return (0);
 }
+*/
 
-char 	*ft_tolower_str(char *str)
-{
-	char 	*lower_str;
-	int		i;
-
-	lower_str = ft_strnew(ft_strlen(str));
-	i = 0;
-	while (str[i])
-	{
-		lower_str[i] = ft_tolower(str[i]);
-		i++;
-	}
-	return (lower_str);
-}
-
-int		ft_validate_type(char *type)
-{
-	char	*lower_type;
-	int		valid;
-
-	valid = -1;
-	lower_type = ft_tolower_str(type);
-	if (ft_strequ(lower_type, "int"))
-		valid = 1;
-	else if (ft_strequ(lower_type, "str"))
-		valid = 1;
-	else if (ft_strequ(lower_type, "dbl"))
-		valid = 1;
-	free(lower_type);
-	if (valid == -1)
-		ft_printf("Type \"%s\" Unsupported\n", type);
-	return (valid);
-}
-
-
-
-
+/*
 int	ft_get_field(char *arg, t_field *field)
 {
 	char	**split;
@@ -102,11 +67,11 @@ int	ft_get_field(char *arg, t_field *field)
 	ft_arrdel2(split);
 	return (0);
 }
+*/
 
 
 
-
-
+/*
 int	ft_parse_table_fields(char *buffer, t_field **fields, int *col_count)
 {
 	char 		*arg_str;
@@ -130,14 +95,14 @@ int	ft_parse_table_fields(char *buffer, t_field **fields, int *col_count)
 	ft_arrdel2(arg_arr);
 	return (0);
 }
-
+*/
 		
 
 
 
 
 
-
+/*
 void	ft_create_table(void)
 {
 	t_table	tab;
@@ -158,3 +123,83 @@ void	ft_create_table(void)
 	tab.row_count = 0;
 	ft_serialize_table(tab);
 }
+*/
+
+
+
+
+int		ft_init_table_fields(t_table *tab, char **args)
+{
+	char	**split;
+	int		i;
+
+	tab->col_count = ft_arrlen2(args);
+	tab->fields = (t_field*)ft_malloc(sizeof(t_field) * tab->col_count);
+	i = -1;
+write(1, "a\n", 2);
+	while (++i < tab->col_count)
+	{
+printf("%s\n", args[i]);
+		split = ft_strsplit(args[i], ' ');	
+		if (ft_arrlen2(split) != 2)
+		{
+			ft_printf("Format Error\n");
+			return (-1);//free fields and splits
+		}
+		if (!ft_validate_type(split[1]))
+			return (-1);//free fields and splits
+		tab->fields[i].name = ft_strdup(split[0]);
+		tab->fields[i].type = ft_strdup(split[1]);
+		//ft_arrdel2(split);
+	}
+
+
+	return (0);
+}
+
+
+
+
+
+void	ft_create_table(char *buffer)
+{
+	t_table	tab;
+	char	**args;
+
+	tab.name = ft_get_outer_str(buffer);
+	if (!tab.name)
+		return ; //free name?
+	if (access(tab.name, F_OK) != -1)
+	{
+		ft_printf("Table \"%s\" Already Exists\n", tab.name);
+		return ;
+	}
+	args = ft_get_args(buffer);
+	if (ft_init_table_fields(&tab, args) < 0)
+		return ; //free name and args?
+	//ft_arrdel2(args);
+	tab.row_count = 0;
+
+//	printf("%s %s\n", tab.fields[0].name, tab.fields[0].type);
+	ft_serialize_table(tab);
+}
+
+
+
+int		ft_validate_type(char *type)
+{
+	int		valid;
+
+	valid = 0;
+	ft_str_tolower(&type);
+	if (ft_strequ(type, "int"))
+		valid = 1;
+	else if (ft_strequ(type, "str"))
+		valid = 1;
+	if (valid == 0)
+		ft_printf("Type Unsupported\n");
+	return (valid);
+}
+
+
+

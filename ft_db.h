@@ -40,17 +40,30 @@ typedef struct		s_table
 	t_cell		**rows;
 }					t_table;
 
+
+//ft_create_table.c
+void	ft_create_table(char *buffer);
+int		ft_init_table_fields(t_table *tab, char **args);
+int		ft_validate_type(char *type);
+
+//ft_insert_into.c
+void	ft_insert_into(char *buffer);
+
+//ft_parse.c
+char    *ft_get_outer_str(char *buffer);
+char    **ft_get_args(char *buffer);
+int 	ft_check_str_begin(char *buffer, char *str);
+
+//ft_serialize.c
 void	ft_serialize_table(t_table tab);
 void	ft_serialize_table_data(FILE *fp, t_table tab);
 void	ft_serialize_rows(FILE *fp, t_table tab);
+
+//ft_deserialize.c
 t_cell	**ft_deserialize_rows(FILE *fp, t_table tab);
 t_table ft_deserialize_table_data(FILE *fp);
 t_table	ft_deserialize_table(char *table_name);
-void	ft_create_table(void);
-void	ft_insert_into(void);
-void	ft_select(void);
-int		ft_parse_table_name(char *buffer, char **name);
 
-int		*ft_get_col_indices(char **fields_arr, int field_count, t_table tab);
+
 
 #endif

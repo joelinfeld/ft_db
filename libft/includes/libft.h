@@ -117,5 +117,6 @@ int				ft_islower(char c);
 long long		ft_power(int base, unsigned int exp);
 int				ft_printf(const char *format, ...);
 void			*ft_malloc(size_t bytes);
+void			ft_str_tolower(char **str);
 
 #endif

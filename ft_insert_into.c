@@ -83,7 +83,7 @@ t_cell	*ft_new_row(t_table tab)
 
 
 
-
+/*
 int	ft_get_insert_table(char *buffer, t_table *tab)
 {
 	char *table_name;
@@ -98,9 +98,9 @@ int	ft_get_insert_table(char *buffer, t_table *tab)
 	*tab = ft_deserialize_table(table_name);
 	return (0);
 }
+*/
 
-
-
+/*
 int	ft_get_args(char *buffer,char ***field_args)
 {
 	char	*arg_str;
@@ -126,7 +126,7 @@ int	ft_get_args(char *buffer,char ***field_args)
 	}
 	return (0);
 }
-
+*/
 
 
 
@@ -247,7 +247,8 @@ void	ft_get_values(int *field_indices, int field_count, t_table *tab)
 	{
 		ft_printf("INSERTION %d: ", i + 1);
 		ft_gnl(0, &buffer);
-		if (ft_get_args(buffer, &value_args) < 0)
+		value_args = ft_get_args(buffer);
+		if (!value_args)
 		{
 			free(buffer);
 			continue ;
@@ -269,27 +270,35 @@ void	ft_get_values(int *field_indices, int field_count, t_table *tab)
 
 
 
-void	ft_insert_into(void)
+void	ft_insert_into(char *buffer)
 {
 	t_table tab;
-	char	*buffer;
 	char	**field_args;
 	int		*field_indices;
 	int		field_count;
 
-	ft_printf(">> ");
-	ft_gnl(0, &buffer);
-	if (ft_get_insert_table(buffer, &tab) < 0)
+	tab.name = ft_get_outer_str(buffer);
+	if (!tab.name)
+		return ; //free name?
+	tab = ft_deserialize_table(tab.name);
+	field_args = ft_get_args(buffer);
+	if (!field_args)
 		return ;
-	if (ft_get_args(buffer, &field_args) < 0)//make a ft_get_field_args_w_types() for create
-		return ;
-	free(buffer);
 	if (ft_get_field_indices(field_args, &field_indices, &field_count, tab) < 0)
 		return ;
 //	ft_arrdel2(field_args);//need to be freed, but having a problem
 	ft_get_values(field_indices, field_count, &tab);
 	ft_serialize_table(tab);
 }
+
+
+
+
+
+
+
+
+
 
 
 
