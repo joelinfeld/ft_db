@@ -22,13 +22,6 @@ typedef struct	s_field
 	char *type;
 }				t_field;
 
-//struct of cell that containts a u_data as well as data of the field and data type contained in the cell
-typedef struct	s_cell
-{
-	char		*field;//are these needed?
-	char		*type;//are these needed?
-	t_data		*value;
-}				t_cell;
 
 //table that consits of a 2D cell array and a table data struct.
 typedef struct		s_table
@@ -37,7 +30,7 @@ typedef struct		s_table
 	int			col_count;
 	int			row_count;
 	t_field		*fields;
-	t_cell		**rows;
+	t_data		***rows;
 }					t_table;
 
 
@@ -60,7 +53,7 @@ void	ft_serialize_table_data(FILE *fp, t_table tab);
 void	ft_serialize_rows(FILE *fp, t_table tab);
 
 //ft_deserialize.c
-t_cell	**ft_deserialize_rows(FILE *fp, t_table tab);
+t_data	***ft_deserialize_rows(FILE *fp, t_table tab);
 t_table ft_deserialize_table_data(FILE *fp);
 t_table	ft_deserialize_table(char *table_name);
 

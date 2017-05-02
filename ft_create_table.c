@@ -136,10 +136,8 @@ int		ft_init_table_fields(t_table *tab, char **args)
 	tab->col_count = ft_arrlen2(args);
 	tab->fields = (t_field*)ft_malloc(sizeof(t_field) * tab->col_count);
 	i = -1;
-write(1, "a\n", 2);
 	while (++i < tab->col_count)
 	{
-printf("%s\n", args[i]);
 		split = ft_strsplit(args[i], ' ');	
 		if (ft_arrlen2(split) != 2)
 		{

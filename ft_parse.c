@@ -47,10 +47,8 @@ char	**ft_get_args(char *buffer)
 	while (split_args[++i])
 	{
 		trimmed = ft_strtrim(split_args[i]);
-ft_printf("trimmed %s\n", trimmed);
 		free(split_args[i]);
 		split_args[i] = trimmed;
-ft_printf("after %s\n", split_args[i]);
 	}
 	return (split_args);
 }

@@ -48,55 +48,44 @@ t_table	ft_deserialize_table_data(FILE *fp)
 	return (tab);
 }
 
-t_data	*ft_get_value(FILE *fp, char *type, char *cell_str)
+void	ft_get_value(FILE *fp, char *type, char *cell_str, t_data **value)
 {
-	t_data	*value;
 	int 	len;
 
 	if (*cell_str == '~')
-		return (NULL);
-	value = (t_data*)ft_malloc(sizeof(t_data));
+		*value = NULL;
+	*value = (t_data*)ft_malloc(sizeof(t_data));
 	if (ft_strequ(type, "int"))
-		value->i = ft_atoi(cell_str);
+		(*value)->i = ft_atoi(cell_str);
 	else if (ft_strequ(type, "str"))
 	{
 		len = ft_atoi(cell_str);
 		cell_str = ft_strchr(cell_str, '\"') + 1;
-		value->str = ft_strndup(cell_str, len);
+		(*value)->str = ft_strndup(cell_str, len);
 	}
-	return (value);
 }
 
 
 
 
-t_cell	**ft_deserialize_rows(FILE *fp, t_table tab)
+t_data	***ft_deserialize_rows(FILE *fp, t_table tab)
 {
-	t_data **rows;
+	t_data ***rows;
 	char line[255];
 	char **split;
 	int i;
 	int j;
 
-	rows = (t_data**)ft_malloc(sizeof(t_data*) * tab.row_count);
-	i = 0;
-	while (i < tab.row_count)
+	rows = (t_data***)ft_malloc(sizeof(t_data**) * tab.row_count);
+	i = -1;
+	while (++i < tab.row_count)
 	{
-		rows[i] = (t_data*)ft_malloc(sizeof(t_data) * tab.col_count);
+		rows[i] = (t_data**)ft_malloc(sizeof(t_data*) * tab.col_count);
 		fgets(line, 255, fp);
 		split = ft_strsplit(line, ',');
-		j = 0;
-		while (j < tab.col_count)
-		{
-			/* no longer needed as rows only contains cell values
-			**rows[i][j].field = ft_strdup(tab.fields[j].name);
-			**rows[i][j].type = ft_strdup(tab.fields[j].type);
-			*/
-			rows[i][j].value = ft_get_value(fp, tab.fields[j].type, split[j]);
-
-			j++;
-		}
-		i++;
+		j = -1;
+		while (++j < tab.col_count)
+			ft_get_value(fp, tab.fields[j].type, split[j], &(rows[i][j]));
 	}
 	return (rows);
 }

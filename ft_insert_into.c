@@ -64,20 +64,15 @@ int	*ft_all_field_indices(t_table tab, int *field_count)
 
 
 
-t_cell	*ft_new_row(t_table tab)
+t_data	**ft_new_row(t_table tab)
 {
-	t_cell	*row;
+	t_data	**row;
 	int 	i;
 
-	row = (t_cell*)ft_malloc(sizeof(t_cell) * tab.col_count);
-	i = 0;
-	while (i < tab.col_count)
-	{
-		row[i].field = ft_strdup(tab.fields[i].name);
-		row[i].type = ft_strdup(tab.fields[i].type);
-		row[i].value = NULL;
-		i++;
-	}
+	row = (t_data**)ft_malloc(sizeof(t_data*) * tab.col_count);
+	i = -1;
+	while (++i < tab.col_count)
+		row[i] = NULL;
 	return (row);
 }
 
@@ -176,12 +171,12 @@ void	ft_add_row_to_table(char **value_args, int *field_indices, t_table *tab)
 {
 	int 	value_count;
 	char 	*trimmed;
-	t_cell	*row;
+	t_data	**row;
 	int 	i;
 	int 	j;
 
 	tab->row_count++;
-	tab->rows = (t_cell**)realloc(tab->rows, sizeof(t_cell*) * (tab->row_count));
+	tab->rows = (t_data***)realloc(tab->rows, sizeof(t_data**) * (tab->row_count));
 	tab->rows[tab->row_count - 1] = ft_new_row(*tab);
 	row = tab->rows[tab->row_count - 1];
 	value_count = ft_arrlen2(value_args);
@@ -189,14 +184,12 @@ void	ft_add_row_to_table(char **value_args, int *field_indices, t_table *tab)
 	while (i < value_count)
 	{
 		j = field_indices[i];
-		row[j].field = ft_strdup(tab->fields[j].name);
-		row[j].type = ft_strdup(tab->fields[j].type);
-		row[j].value = (t_data*)ft_malloc(sizeof(t_data));
+		row[j] = (t_data*)ft_malloc(sizeof(t_data));
 		trimmed = ft_strtrim(value_args[i]);
 		if (ft_strequ(tab->fields[j].type, "int"))
-			row[j].value->i = ft_atoi(trimmed);
+			row[j]->i = ft_atoi(trimmed);
 		else if (ft_strequ(tab->fields[j].type, "str"))
-			row[j].value->str = ft_strdup(trimmed);
+			row[j]->str = ft_strdup(trimmed);
 		free(trimmed);
 		i++;
 	}

@@ -49,7 +49,7 @@ void		ft_serialize_rows(FILE *fp, t_table tab)
 		k = 0;
 		while (k < tab.col_count)
 		{
-			ft_typrint(tab.fields[k].type, tab.rows[i][k].value, fp);
+			ft_typrint(tab.fields[k].type, tab.rows[i][k], fp);
 			k++;
 		}
 		fprintf(fp, "\n");
