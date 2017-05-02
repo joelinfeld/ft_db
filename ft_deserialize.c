@@ -72,24 +72,26 @@ t_data	*ft_get_value(FILE *fp, char *type, char *cell_str)
 
 t_cell	**ft_deserialize_rows(FILE *fp, t_table tab)
 {
-	t_cell **rows;
+	t_data **rows;
 	char line[255];
 	char **split;
 	int i;
 	int j;
 
-	rows = (t_cell**)ft_malloc(sizeof(t_cell*) * tab.row_count);
+	rows = (t_data**)ft_malloc(sizeof(t_data*) * tab.row_count);
 	i = 0;
 	while (i < tab.row_count)
 	{
-		rows[i] = (t_cell*)ft_malloc(sizeof(t_cell) * tab.col_count);
+		rows[i] = (t_data*)ft_malloc(sizeof(t_data) * tab.col_count);
 		fgets(line, 255, fp);
 		split = ft_strsplit(line, ',');
 		j = 0;
 		while (j < tab.col_count)
 		{
-			rows[i][j].field = ft_strdup(tab.fields[j].name);
-			rows[i][j].type = ft_strdup(tab.fields[j].type);
+			/* no longer needed as rows only contains cell values
+			**rows[i][j].field = ft_strdup(tab.fields[j].name);
+			**rows[i][j].type = ft_strdup(tab.fields[j].type);
+			*/
 			rows[i][j].value = ft_get_value(fp, tab.fields[j].type, split[j]);
 
 			j++;
