@@ -39,8 +39,9 @@ void	ft_create_table(char *buffer);
 int		ft_init_table_fields(t_table *tab, char **args);
 int		ft_validate_type(char *type);
 
-//ft_insert_into.c
-void	ft_insert_into(char *buffer);
+//ft_insert_rows.c
+void	ft_insert_rows(char *buffer);
+int		*ft_get_field_indices(char **args, int *arg_count, t_table tab);
 
 //ft_parse.c
 char    *ft_get_outer_str(char *buffer);
@@ -56,6 +57,9 @@ void	ft_serialize_rows(FILE *fp, t_table tab);
 t_data	***ft_deserialize_rows(FILE *fp, t_table tab);
 t_table ft_deserialize_table_data(FILE *fp);
 t_table	ft_deserialize_table(char *table_name);
+
+//ft_select.c
+void	ft_select(char *buffer);
 
 
 

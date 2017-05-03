@@ -2,9 +2,68 @@
 
 
 
+void	ft_display_rows(int *indices, int arg_count, t_table tab)
+{
+	t_data	**row;
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < tab.row_count)
+	{
+		row = tab.rows[i];
+		j = -1;
+		while (++j < arg_count)
+		{
+			if (!row[indices[j]])
+				ft_printf("(null) ");
+			else if (ft_strequ(tab.fields[indices[j]].type, "int"))
+				ft_printf("%d ", row[indices[j]]->i);
+			else if (ft_strequ(tab.fields[indices[j]].type, "str"))
+				ft_printf("%s ", row[indices[j]]->str);
+		}
+		ft_printf("\n");
+	}
+}
+				
 
 
 
+
+void	ft_select(char *buffer)
+{
+	t_table tab;
+	char	**args;
+	int		*field_indices;
+	int		arg_count;
+
+	tab.name = ft_get_outer_str(buffer);
+
+
+	if (!tab.name)
+		return ;
+
+	tab = ft_deserialize_table(tab.name);
+
+	args = ft_get_args(buffer);
+	if (!args)
+		return ;
+
+	field_indices = ft_get_field_indices(args, &arg_count, tab);
+	if (!field_indices)
+		return ;
+
+	ft_display_rows(field_indices, arg_count, tab);
+	free(field_indices);
+	ft_arrdel2(args);
+}
+
+
+
+
+
+
+/*
 
 void	ft_select(void)
 {
@@ -60,5 +119,5 @@ void	ft_select(void)
 	else
 		ft_printf("Table Does Not Exist\n");
 }
-
+*/
 
