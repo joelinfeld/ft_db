@@ -60,6 +60,15 @@ t_table	ft_deserialize_table(char *table_name);
 
 //ft_select.c
 void	ft_select(char *buffer);
+void	ft_display_rows(int *field_indices, int field_count, int *row_indices, int row_count, t_table tab);
+
+//ft_where.c
+int		ft_get_field_index(char *field, t_table tab);
+int		ft_where_match(t_data *row_val, char *type, char *op, char *cmp_val);
+int		*ft_where(char *buffer, int *row_count, t_table tab);
+
+//ft_insert_column.c
+void	ft_insert_column(char *buffer);
 
 
 

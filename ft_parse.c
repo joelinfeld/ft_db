@@ -50,6 +50,7 @@ char	**ft_get_args(char *buffer)
 		free(split_args[i]);
 		split_args[i] = trimmed;
 	}
+	bracket_pnt[0] = ')';
 	return (split_args);
 }
 

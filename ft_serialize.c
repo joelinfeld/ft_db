@@ -4,7 +4,7 @@
 void		ft_serialize_table_data(FILE *fp, t_table tab)
 {
 	int i;
-
+	
 	fprintf(fp, "%lu:\"%s\",", strlen(tab.name), tab.name);
 	fprintf(fp, "%d,{", tab.col_count);
 	i = 0;
@@ -64,6 +64,7 @@ void	ft_serialize_table(t_table tab)
 	FILE *fp;
 
 	fp = fopen(tab.name, "w");
+	
 	ft_serialize_table_data(fp, tab);
 	ft_serialize_rows(fp, tab);
 	fclose(fp);
