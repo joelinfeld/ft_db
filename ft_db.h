@@ -70,6 +70,7 @@ int		*ft_where(char *buffer, int *row_count, t_table tab);
 //ft_insert_column.c
 void	ft_insert_column(char *buffer);
 
-
+//ft_update.c
+void	ft_update(char *buffer);
 
 #endif

@@ -11,6 +11,8 @@ int		ft_handle_command(char *buffer)
 		ft_insert_column(buffer + ft_strlen("INSERT COLUMNS "));
 	else if (ft_check_str_begin(buffer, "SELECT "))
 		ft_select(buffer + ft_strlen("SELECT "));
+	else if (ft_check_str_begin(buffer, "UPDATE "))
+		ft_update(buffer + ft_strlen("UPDATE "));
 	else
 		ft_printf("Invalid Command\n");
 	return (0);
