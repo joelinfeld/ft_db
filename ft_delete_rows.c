@@ -7,18 +7,19 @@ void		ft_delete_rows(char *buffer)
 	int			*row_inds;
 	int			i;
 	int			j;
-	int			row_cnt;
+	int			del_row_cnt;
 	int			index;
 
 	if (ft_parse_function(buffer, &tab, &args) < 0)
 		return ;
-	row_inds = ft_where(buffer, &row_cnt, tab);
+	ft_arrdel2(args);
+	row_inds = ft_where(buffer, &del_row_cnt, tab);
 	if (!row_inds)
 		return ;
 	i = -1;
-	while (++i < row_cnt)
+	while (++i < del_row_cnt)
 	{
-		index = row_inds[i]
+		index = row_inds[i];
 		j = -1;
 		while(++j < tab.col_cnt)
 		{
@@ -27,11 +28,12 @@ void		ft_delete_rows(char *buffer)
 			if (tab.rows[index][j])
 				free(tab.rows[index][j]);
 			if (index != tab.row_cnt - 1)
-				tab.rows[index][j] = tab.rows[tab.row_cnt - 1][j];
-			if (tab.rows[tab.row_cnt - 1][j])
-				free(tab.rows[tab.row_cnt - 1][j]);
+				tab.rows[index][j] = tab.rows[tab.row_cnt - 1][j];//need to copy it in, otherwise freeing netx frees this or just dont free it
+	//		if (tab.rows[tab.row_cnt - 1][j])
+	//			free(tab.rows[tab.row_cnt - 1][j]);
 		}
 		tab.row_cnt -= 1;
 	}
-	tab.rows = (t_data***)realloc(tab.rows, sizeof(t_data**) * row_cnt);
+	tab.rows = (t_data***)realloc(tab.rows, sizeof(t_data**) * tab.row_cnt);
+	ft_serialize_tab(tab);
 }

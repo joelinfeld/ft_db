@@ -86,12 +86,19 @@ int		*ft_all_row_inds(int row_cnt, int *match_cnt);
 
 
 //ft_insert_column.c
-void	ft_insert_column(char *buffer);
+void	ft_insert_cols(char *buffer);
 
 //ft_update.c
 void	ft_update(char *buffer);
 
 //ft_sort.c
 void	ft_sort(char *buffer);
+
+//ft_delete_rows.c
+void	ft_delete_rows(char *buffer);
+
+//ft_delete_column.c
+void	ft_delete_cols(char *buffer);
+
 
 #endif

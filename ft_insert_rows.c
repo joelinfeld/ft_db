@@ -33,7 +33,7 @@ void	ft_populate_new_rows(int *fld_inds, int fld_cnt, t_table *tab)
 	i = 0;
 	while (i < row_cnt)
 	{
-		ft_printf("INSERTION #%d: ", i + 1);
+		ft_printf("INSERTION #%d >> ", i + 1);
 		ft_gnl(0, &buffer);
 		val_args = ft_get_args(buffer);
 		if (!val_args)
@@ -56,7 +56,7 @@ int	ft_get_insert_cnt(void)
 	char 	*buffer;
 	int		row_count;
 
-	ft_printf("# OF ROWS TO INSERT: ");
+	ft_printf("# OF ROWS TO INSERT >> ");
 	ft_gnl(0, &buffer);
 	row_count = ft_atoi(buffer);
 	free(buffer);
