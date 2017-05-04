@@ -13,6 +13,8 @@ int		ft_handle_command(char *buffer)
 		ft_select(buffer + ft_strlen("SELECT "));
 //	else if (ft_check_str_begin(buffer, "UPDATE "))
 //		ft_update(buffer + ft_strlen("UPDATE "));
+	else if (ft_check_str_begin(buffer, "SORT "))
+		ft_sort(buffer + ft_strlen("SORT "));
 	else
 		ft_printf("Invalid Command\n");
 	return (0);

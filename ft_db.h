@@ -91,4 +91,7 @@ void	ft_insert_column(char *buffer);
 //ft_update.c
 void	ft_update(char *buffer);
 
+//ft_sort.c
+void	ft_sort(char *buffer);
+
 #endif
