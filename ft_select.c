@@ -2,67 +2,29 @@
 
 
 
-void	ft_display_rows(int *field_indices, int field_count, int *row_indices, int row_count, t_table tab)
-{
-	t_data	**row;
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < row_count)
-	{
-		row = tab.rows[row_indices[i]];
-		j = -1;
-		while (++j < field_count)
-		{
-			if (!row[field_indices[j]])
-				ft_printf("(null) ");
-			else if (ft_strequ(tab.fields[field_indices[j]].type, "int"))
-				ft_printf("%d ", row[field_indices[j]]->i);
-			else if (ft_strequ(tab.fields[field_indices[j]].type, "str"))
-				ft_printf("%s ", row[field_indices[j]]->str);
-		}
-		ft_printf("\n");
-	}
-}
-				
-
-
-
-
 void	ft_select(char *buffer)
 {
 	t_table tab;
 	char	**args;
-	int		*field_indices;
-	int		*row_indices;
-	int		field_count;
-	int		row_count;
+	int		*fld_inds;
+	int		*row_inds;
+	int		fld_cnt;
+	int		row_cnt;
 
-	tab.name = ft_get_outer_str(buffer);
-
-
-	if (!tab.name)
+	if (ft_parse_function(buffer, &tab, &args) < 0)
 		return ;
-
-	tab = ft_deserialize_table(tab.name);
-
-	args = ft_get_args(buffer);
-	if (!args)
+	fld_inds = ft_get_fld_inds(args, &fld_cnt, tab);
+	if (!fld_inds)
 		return ;
-
-	field_indices = ft_get_field_indices(args, &field_count, tab);
-	if (!field_indices)
+	row_inds = ft_where(buffer, &row_cnt, tab);
+	if (!row_inds)
+	{
+		ft_printf("WHERE Clause Formal Error\n");
 		return ;
-
-	
-	row_indices = ft_where(buffer, &row_count, tab);
-	if (!row_indices)
-		return ;
-
-	ft_display_rows(field_indices, field_count, row_indices, row_count, tab);
-	free(field_indices);
-	free(row_indices);
+	}
+	ft_display_rows(fld_inds, fld_cnt, row_inds, row_cnt, tab);
+	free(fld_inds);
+	free(row_inds);
 	ft_arrdel2(args);
 }
 

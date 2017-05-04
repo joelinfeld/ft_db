@@ -43,6 +43,12 @@ char	**ft_get_args(char *buffer)
 	}
 	bracket_pnt[0] = '\0';
 	split_args = ft_strsplit(arg_str, ',');
+	if (!split_args[0])
+	{
+		split_args = (char**)realloc(split_args, sizeof(char*) * 2);
+		split_args[0] = ft_strnew(0);
+		split_args[1] = NULL;
+	}
 	i = -1;
 	while (split_args[++i])
 	{
@@ -53,6 +59,23 @@ char	**ft_get_args(char *buffer)
 	bracket_pnt[0] = ')';
 	return (split_args);
 }
+
+
+
+int	ft_parse_function(char *buffer, t_table *tab, char ***args)
+{
+	char	*table_name;
+
+	table_name = ft_get_outer_str(buffer);
+	if (!table_name)
+		return (-1); //free name?
+	*tab = ft_deserialize_tab(table_name);
+	*args = ft_get_args(buffer);
+	if (!*args)
+		return (-1); //free stuff?
+	return (0);
+}
+
 
 
 

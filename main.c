@@ -1,5 +1,5 @@
 #include "ft_db.h"
-
+//fix memory leaks handle errors add dbls sort format display matchnmatch
 
 int		ft_handle_command(char *buffer)
 {
@@ -7,12 +7,12 @@ int		ft_handle_command(char *buffer)
 		ft_create_table(buffer + ft_strlen("CREATE TABLE "));
 	else if (ft_check_str_begin(buffer, "INSERT ROWS "))
 		ft_insert_rows(buffer + ft_strlen("INSERT ROWS "));
-	else if (ft_check_str_begin(buffer, "INSERT COLUMNS "))
-		ft_insert_column(buffer + ft_strlen("INSERT COLUMNS "));
+//	else if (ft_check_str_begin(buffer, "INSERT COLUMNS "))
+//		ft_insert_column(buffer + ft_strlen("INSERT COLUMNS "));
 	else if (ft_check_str_begin(buffer, "SELECT "))
 		ft_select(buffer + ft_strlen("SELECT "));
-	else if (ft_check_str_begin(buffer, "UPDATE "))
-		ft_update(buffer + ft_strlen("UPDATE "));
+//	else if (ft_check_str_begin(buffer, "UPDATE "))
+//		ft_update(buffer + ft_strlen("UPDATE "));
 	else
 		ft_printf("Invalid Command\n");
 	return (0);
