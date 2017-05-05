@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:30 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 18:43:45 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/05 15:25:44 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_table		ft_deserialize_tab_data(int	fd)
 	tab.col_cnt = ft_atoi(split[1]);
 	tab.flds = ft_get_tab_flds(split[2], tab.col_cnt);
 	tab.row_cnt = ft_atoi(split[3]);
+	ft_arrdel2(split);
 	free(buffer);
 	return (tab);
 }
@@ -90,6 +91,7 @@ t_data	***ft_deserialize_rows(int fd, t_table tab)
 		while (++j < tab.col_cnt)
 			rows[i][j] = ft_get_value(tab.flds[j].type, split[j]);
 		free(buffer);
+		ft_arrdel2(split);
 	}
 	return (rows);
 }

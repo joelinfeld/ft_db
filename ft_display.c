@@ -6,13 +6,13 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:40 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 14:32:20 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 15:32:40 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_db.h"
 
-int	*ft_get_col_widths(int *fld_inds,int fld_cnt, int *row_inds, int row_cnt, t_table tab)
+int	*ft_get_col_widths(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_table tab)
 {
 	int		*col_widths;
 	t_data	*value;

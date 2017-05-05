@@ -6,17 +6,18 @@ int		ft_create_table(char *buffer)
 	char	**args;
 
 	if(!(tab.name = ft_get_outer_str(buffer)))
-		return (ft_db_error(2, ""));  //free name?
+		return (ft_db_error(2, ""));
 	if (access(tab.name, F_OK) != -1)
 		return (ft_db_error(1, tab.name));
 	args = ft_get_args(buffer);
 	if (!args)
 		return(ft_db_error(2, ""));
 	if (ft_init_tab_flds(&tab, args) > 0)
-		return (0); //free name and args?
-	//ft_arrdel2(args);
+		return (0);
 	tab.row_cnt = 0;
 	ft_serialize_tab(tab);
+	ft_free_tab(tab);
+	ft_arrdel2(args);
 	return (0);
 }
 
@@ -35,7 +36,7 @@ int		ft_init_tab_flds(t_table *tab, char **args)
 		if (ft_arrlen2(split) != 2)
 			return (ft_db_error(2, ""));
 		if (!ft_validate_type(split[1]))
-			return (ft_db_error(3, split[1]));//free fields and splits
+			return (ft_db_error(3, split[1]));
 		if (ft_repeated_field(split[0], i, tab->flds))
 			return (ft_db_error(9, split[0]));
 		if (ft_strchr(split[0], '\t'))
@@ -43,7 +44,7 @@ int		ft_init_tab_flds(t_table *tab, char **args)
 		tab->flds[i].name = ft_strdup(split[0]);
 		
 		tab->flds[i].type = ft_strdup(split[1]);
-		//ft_arrdel2(split);
+		ft_arrdel2(split);
 	}
 	return (0);
 }

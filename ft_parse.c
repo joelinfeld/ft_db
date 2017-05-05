@@ -10,7 +10,6 @@ char	*ft_get_outer_str(char *buffer)
 		return (NULL);
 	bracket_pnt[0] = '\0';
 	outer_str = ft_strtrim(buffer);
-	//free(outer_str);
 	if (!*outer_str || ft_strchr(outer_str, ' ') || ft_strchr(outer_str, '\t'))
 		return (NULL);
 	bracket_pnt[0] = '(';
@@ -56,12 +55,13 @@ int	ft_parse_function(char *buffer, t_table *tab, char ***args)
 
 	table_name = ft_get_outer_str(buffer);
 	if (!table_name)
-		return (ft_db_error(2, "")); //free name?
+		return (ft_db_error(2, ""));
 	if(ft_deserialize_tab(table_name, tab))
 		return (1);
 	*args = ft_get_args(buffer);
 	if (!*args)
-		return (ft_db_error(2, "")); //free stuff?
+		return (ft_db_error(2, ""));
+	free(table_name);
 	return (0);
 }
 

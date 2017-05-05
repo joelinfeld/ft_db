@@ -11,7 +11,6 @@ int	ft_delete_rows(char *buffer)
 		return (0);
 	if (ft_arrlen2(args) != 1 || *(args[0]) != '\0')
 		return (ft_db_error(2, ""));
-	ft_arrdel2(args);
 	if (!(row_inds = ft_where(buffer, &del_row_cnt, tab)))
 		return (ft_db_error(2, ""));
 	i = del_row_cnt;
@@ -25,9 +24,12 @@ int	ft_delete_rows(char *buffer)
 			if (row_inds[i] != tab.row_cnt - 1)
 				tab.rows[row_inds[i]][j] = tab.rows[tab.row_cnt - 1][j];
 		}
-		tab.row_cnt -= 1;
+		tab.row_cnt--;
 	}
 	tab.rows = (t_data***)realloc(tab.rows, sizeof(t_data**) * tab.row_cnt);
 	ft_serialize_tab(tab);
+	ft_free_tab(tab);
+	ft_arrdel2(args);
+	free(row_inds);
 	return (0);
 }

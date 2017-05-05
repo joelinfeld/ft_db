@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 14:20:49 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 15:12:32 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,8 @@ int 	ft_order_by(char *buffer, t_table *tab);
 
 //ft_delete_table.c
 int		ft_delete_table(char *buffer);
+
+//ft_free_tab.c
+void	ft_free_tab(t_table tab);
 
 #endif

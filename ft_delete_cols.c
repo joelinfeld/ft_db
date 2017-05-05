@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:36:45 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 13:46:45 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 15:19:29 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_delete_cols(char *buffer)
 	if (!fld_inds)
 		return ;
 	qsort(fld_inds, arg_cnt, sizeof(int), ft_int_cmp);
-	ft_arrdel2(args);
 	i = -1;
 	while (++i < arg_cnt)
 	{
@@ -35,6 +34,9 @@ void	ft_delete_cols(char *buffer)
 			ft_db_error(4, tab.flds[0].name);
 	}
 	ft_serialize_tab(tab);
+	ft_free_tab(tab);
+	ft_arrdel2(args);
+	free(fld_inds);
 }
 
 
