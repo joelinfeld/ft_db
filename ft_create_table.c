@@ -25,7 +25,6 @@ int		ft_init_tab_flds(t_table *tab, char **args)
 {
 	char	**split;
 	int		i;
-	int		j;
 
 	tab->col_cnt = ft_arrlen2(args);
 	tab->flds = (t_field*)ft_malloc(sizeof(t_field) * tab->col_cnt);
