@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:29:33 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 19:35:06 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 20:38:07 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ int		ft_insert_cols(char *buffer)
 			tab.rows[i][tab.col_cnt - new_col_cnt + j] = NULL;
 	}
 	ft_serialize_tab(tab);
+	return (0);
 }
