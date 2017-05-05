@@ -24,6 +24,7 @@ int		ft_init_tab_flds(t_table *tab, char **args)
 {
 	char	**split;
 	int		i;
+	int		j;
 
 	tab->col_cnt = ft_arrlen2(args);
 	tab->flds = (t_field*)ft_malloc(sizeof(t_field) * tab->col_cnt);
@@ -32,10 +33,13 @@ int		ft_init_tab_flds(t_table *tab, char **args)
 	{
 		split = ft_strsplit(args[i], ' ');	
 		if (ft_arrlen2(split) != 2)
-			return(ft_db_error(2, ""));
+			return (ft_db_error(2, ""));
 		if (!ft_validate_type(split[1]))
 			return (ft_db_error(3, split[1]));//free fields and splits
+		if (ft_repeated_field(split[0], i, tab->flds))
+			return (ft_db_error(9, split[0]));
 		tab->flds[i].name = ft_strdup(split[0]);
+		
 		tab->flds[i].type = ft_strdup(split[1]);
 		//ft_arrdel2(split);
 	}
@@ -53,4 +57,15 @@ int		ft_validate_type(char *type)
 	else if (ft_strequ(type, "str"))
 		valid = 1;
 	return (valid);
+}
+
+int		ft_repeated_field(char *fld_name, int col_num, t_field *flds)
+{
+	int j;
+
+	j = -1;
+	while (++j < col_num)
+		if (ft_strequ(fld_name, flds[j].name))
+			return (1);
+	return (0);
 }

@@ -24,7 +24,7 @@ int		ft_handle_command(char *buffer)
 	else if (ft_check_str_begin(buffer, "SORT "))
 		ft_sort(buffer + ft_strlen("SORT "));
 	else
-		ft_printf("Invalid Command\n");
+		ft_db_error(8, "");
 	return (0);
 }
 

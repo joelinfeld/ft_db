@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 18:47:27 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 19:37:42 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_table
 int		ft_create_table(char *buffer);
 int		ft_init_tab_flds(t_table *tab, char **args);
 int		ft_validate_type(char *type);
+int		ft_repeated_field(char *fld_name, int col_num, t_field *flds);
 
 //ft_insert_rows.c
 void	ft_insert_rows(char *buffer);
