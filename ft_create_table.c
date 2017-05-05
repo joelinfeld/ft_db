@@ -16,8 +16,8 @@ int		ft_create_table(char *buffer)
 		return (0); //free name and args?
 	//ft_arrdel2(args);
 	tab.row_cnt = 0;
-
 	ft_serialize_tab(tab);
+	return (0);
 }
 
 int		ft_init_tab_flds(t_table *tab, char **args)

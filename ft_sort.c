@@ -42,19 +42,20 @@ int	ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
 
 
 
-void	ft_sort(char *buffer)
+int	ft_sort(char *buffer)
 {
 	t_table tab;
 	char	**args;
 
 	tab.name = ft_get_outer_str(buffer);
 	if (!tab.name)
-		return ; //free name?
+		return (ft_db_error(2, "")); //free name?
 	tab = ft_deserialize_tab(tab.name);
 	args = ft_get_args(buffer);
 	ft_order_tab(args, &tab);
 	ft_arrdel2(args);
 	ft_serialize_tab(tab);
+	return (0);
 }
 	
 

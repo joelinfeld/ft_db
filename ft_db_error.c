@@ -6,9 +6,11 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:10:12 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 17:44:29 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 18:02:01 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_db.h"
 
 int		ft_db_error(int code, char *str)
 {
@@ -23,7 +25,7 @@ int		ft_db_error(int code, char *str)
 		ft_printf("Primary Column \"%s\" Can't Be Deleted\n", str);
 	else if (code == 5)
 		ft_printf("Field \"%s\" Does Not Exist", str);
-	else if (code = 6)
+	else if (code == 6)
 		ft_printf("Incorrect amount of values\n");
 	return (code);
 }
