@@ -9,6 +9,8 @@ int		ft_handle_command(char *buffer)
 		exit(0);
 	else if (ft_check_str_begin(buffer, "CREATE TABLE "))
 		ft_create_table(buffer + ft_strlen("CREATE TABLE "));
+	else if (ft_check_str_begin(buffer, "DELETE TABLE "))
+		ft_delete_table(buffer + ft_strlen("DELETE TABLE "));
 	else if (ft_check_str_begin(buffer, "INSERT ROWS "))
 		ft_insert_rows(buffer + ft_strlen("INSERT ROWS "));
 	else if (ft_check_str_begin(buffer, "DELETE ROWS "))

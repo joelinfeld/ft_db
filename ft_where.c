@@ -20,8 +20,6 @@ int	*ft_where(char *buffer, int *match_cnt, t_table tab)
 	return (ft_get_matches(tab, args, arg_cnt,  match_cnt)); //free args, trimmed
 }
 
-
-
 int	*ft_get_matches(t_table tab, char **args, int arg_cnt, int *match_cnt)
 {
 	int		*row_inds;
@@ -57,14 +55,6 @@ int	*ft_get_matches(t_table tab, char **args, int arg_cnt, int *match_cnt)
 	return (row_inds);
 }
 
-
-			
-
-
-
-
-
-
 int ft_is_match(t_data *row_val, char *type, char *op, char *cmp_val)
 {
 	int	result;
@@ -94,8 +84,6 @@ int ft_is_match(t_data *row_val, char *type, char *op, char *cmp_val)
 	else 
 		return (0);
 }
-
-
 
 int	*ft_all_row_inds(int row_cnt, int *match_cnt)
 {

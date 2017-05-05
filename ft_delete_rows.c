@@ -15,8 +15,8 @@ void		ft_delete_rows(char *buffer)
 	ft_arrdel2(args);
 	if (!(row_inds = ft_where(buffer, &del_row_cnt, tab)))
 		return ;
-	i = -1;
-	while (++i < del_row_cnt)
+	i = del_row_cnt;
+	while (--i >= 0)
 	{
 		index = row_inds[i];
 		j = -1;

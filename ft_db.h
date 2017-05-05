@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 20:37:03 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/04 21:29:13 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,8 @@ int		ft_db_error(int code, char *str);
 //ft_order_by.c
 int		ft_order_tab(char **args, t_table *tab);
 int 	ft_order_by(char *buffer, t_table *tab);
+
+//ft_delete_table.c
+int		ft_delete_table(char *buffer);
 
 #endif
