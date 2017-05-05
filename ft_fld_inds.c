@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:55:15 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 17:15:54 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 17:57:09 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	*ft_all_fld_inds(int col_cnt, int *fld_cnt)
 
 void	*ft_no_fld_match(int *inds, char *fld_name, char *tab_name)
 {
-	ft_db_error(5, fld_name)
+	ft_db_error(5, fld_name);
 	free(inds);
 	return (NULL);
 }

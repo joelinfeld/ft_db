@@ -1,6 +1,6 @@
 #include "ft_db.h"
 
-void	ft_order_tab(char **args, t_table *tab);
+void	ft_order_tab(char **args, t_table *tab)
 {
 	char	**split;
 	int		fld_ind;
@@ -31,7 +31,7 @@ void	ft_order_tab(char **args, t_table *tab);
 	}
 	if (ft_strequ(tab->flds[fld_ind].type, "str"))
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_str_cmp);
-	else if (ft_strequ(tab.flds[fld_ind].type, "int"))
+	else if (ft_strequ(tab->flds[fld_ind].type, "int"))
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_int_cmp);
 }
 
@@ -39,7 +39,7 @@ void	ft_order_tab(char **args, t_table *tab);
 
 int	ft_order_by(char *buffer, t_table *tab)
 {
-	char	*bracker_pnt;
+	char	*bracket_pnt;
 	char	*trimmed;
 	char	**args;
 

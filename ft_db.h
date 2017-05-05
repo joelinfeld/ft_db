@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 16:36:06 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 17:56:04 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ void	ft_update(char *buffer);
 
 //ft_sort.c
 void	ft_sort(char *buffer);
+int ft_row_int_cmp(void *thunk, const void *row1, const void *row2);
+int ft_row_str_cmp(void *thunk, const void *row1, const void *row2);
+
 
 //ft_delete_rows.c
 void	ft_delete_rows(char *buffer);
@@ -113,5 +116,9 @@ void	ft_delete_cols(char *buffer);
 
 //ft_db_error
 int		ft_db_error(int code, char *str);
+
+//ft_order_by.c
+void    ft_order_tab(char **args, t_table *tab);
+int 	ft_order_by(char *buffer, t_table *tab);
 
 #endif

@@ -13,7 +13,7 @@ int		ft_create_table(char *buffer)
 	if (!args)
 		return(ft_db_error(2, ""));
 	if (ft_init_tab_flds(&tab, args) > 0)
-		return ; //free name and args?
+		return (0); //free name and args?
 	//ft_arrdel2(args);
 	tab.row_cnt = 0;
 
