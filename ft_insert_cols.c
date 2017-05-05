@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert_column.c                                 :+:      :+:    :+:   */
+/*   ft_insert_cols.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:29:33 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/02 18:25:19 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 17:40:52 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_db.h"
@@ -21,7 +21,7 @@ void	ft_insert_cols(char *buffer)
 	int			j;
 
 
-	if (ft_parse_function(buffer, &tab, &fld_args) < 0)
+	if (ft_parse_function(buffer, &tab, &fld_args) > 0)
 		return ;
 	new_col_cnt = ft_arrlen2(fld_args);
 	tab.col_cnt += new_col_cnt;

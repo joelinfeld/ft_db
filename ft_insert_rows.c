@@ -7,7 +7,7 @@ void	ft_insert_rows(char *buffer)
 	int		*fld_inds;
 	int		fld_cnt;
 
-	if (ft_parse_function(buffer, &tab, &fld_args) < 0)
+	if (ft_parse_function(buffer, &tab, &fld_args) > 0)
 		return ;
 	fld_inds = ft_get_fld_inds(fld_args, &fld_cnt, tab);
 	if (!fld_inds)
@@ -16,11 +16,6 @@ void	ft_insert_rows(char *buffer)
 	ft_populate_new_rows(fld_inds, fld_cnt, &tab);
 	ft_serialize_tab(tab);
 }
-
-
-
-
-
 
 void	ft_populate_new_rows(int *fld_inds, int fld_cnt, t_table *tab)
 {
@@ -50,7 +45,6 @@ void	ft_populate_new_rows(int *fld_inds, int fld_cnt, t_table *tab)
 	}
 }
 
-
 int	ft_get_insert_cnt(void)
 {
 	char 	*buffer;
@@ -62,8 +56,6 @@ int	ft_get_insert_cnt(void)
 	free(buffer);
 	return (row_count);
 }
-
-
 	
 void	ft_add_row_to_tab(char **val_args, int *fld_inds, t_table *tab)
 {
@@ -97,9 +89,6 @@ void	ft_add_row_to_tab(char **val_args, int *fld_inds, t_table *tab)
 	}
 }
 
-
-
-
 t_data	**ft_new_row(t_table tab)
 {
 	t_data	**row;
@@ -112,30 +101,13 @@ t_data	**ft_new_row(t_table tab)
 	return (row);
 }
 
-
-
-
 int	ft_wrong_arg_cnt(char **val_args, int fld_cnt, char *buffer)
 {
 	if (ft_arrlen2(val_args) != fld_cnt)
 	{
 		free(buffer);
 		ft_arrdel2(val_args);
-		ft_printf("Error: Expecting %d Values\n", fld_cnt);
-		return (1);
+		return(ft_db_error(6, ""));
 	}
 	return (0);
 }
-
-	
-
-
-
-
-
-
-
-
-
-
-

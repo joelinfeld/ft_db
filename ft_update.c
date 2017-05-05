@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:40:03 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/02 22:15:58 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 17:46:01 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_db.h"
@@ -26,7 +26,7 @@ void		ft_update(char	*buffer)
 	int			*row_inds;
 	int			row_cnt;
 	
-	if (ft_parse_function(buffer, &tab, &fld_args) < 0)
+	if (ft_parse_function(buffer, &tab, &fld_args) > 0)
 		return ;
 	fld_inds = ft_get_fld_inds(fld_args, &fld_cnt, tab); 
 	row_inds = ft_where(buffer, &row_cnt, tab);
