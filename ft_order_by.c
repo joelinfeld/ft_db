@@ -3,8 +3,7 @@
 int	ft_order_tab(char **args, t_table *tab)
 {
 	char	**split;
-	int		fld_ind;
-	int		thunk;
+	int		fld_ind, thunk;
 
 	if (ft_arrlen2(args) != 1)
 		return (ft_db_error(2, ""));
@@ -42,10 +41,8 @@ int	ft_order_by(char *buffer, t_table *tab)
 	if (!ft_check_str_begin(trimmed, "ORDER BY"))
 		return (-1);
 	args = ft_get_args(trimmed);
-	if (!args)
+	if (!args || ft_arrlen2(args) != 1)
 		return (-1);
-	if (ft_arrlen2(args) != 1)
-		return (ft_db_error(2, ""));
 	ft_order_tab(args, tab);
 	return (0);
 }

@@ -17,7 +17,7 @@ void	ft_serialize_tab(t_table tab)
 
 
 
-//this serializes a table data struct, creates the first line of a serialized file
+
 void		ft_serialize_tab_data(FILE *fp, t_table tab)
 {
 	int i;
@@ -37,7 +37,6 @@ void		ft_serialize_tab_data(FILE *fp, t_table tab)
 
 
 
-//this serializes all rows contained in a table, should never be called before ft_serialize_table_data
 void		ft_serialize_rows(FILE *fp, t_table tab)
 {
 	int		i;
@@ -57,7 +56,6 @@ void		ft_serialize_rows(FILE *fp, t_table tab)
 
 
 
-//this function will be used to determine which print based on data type contained in cells
 void		ft_typrint(char *type, t_data *value, FILE *fp)
 {
 	if (!value)

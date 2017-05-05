@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 21:29:13 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/05 14:20:49 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,12 @@ int		*ft_all_row_inds(int row_cnt, int *match_cnt);
 
 //ft_insert_column.c
 int		ft_insert_cols(char *buffer);
+int		ft_insert_fld(char *fld_arg, int new_col_cnt, int i, t_table *tab);
 
 //ft_update.c
-void	ft_update(char *buffer);
+int		ft_update(char *buffer);
+void	ft_update_rows(t_table *tab, int *fld_inds, int fld_cnt, int *row_inds, int row_cnt);
+char	**ft_get_update_vals(int row_ind, int i, int row_cnt, int fld_cnt, t_table tab);
 
 //ft_sort.c
 int		ft_sort(char *buffer);
@@ -104,10 +107,12 @@ int		ft_row_str_cmp(void *thunk, const void *row1, const void *row2);
 
 
 //ft_delete_rows.c
-void	ft_delete_rows(char *buffer);
+int	ft_delete_rows(char *buffer);
 
 //ft_delete_column.c
 void	ft_delete_cols(char *buffer);
+void	ft_delete_column(int fld_ind, t_table *tab);
+int		ft_int_cmp(const void *a, const void *b);
 
 //ft_db_error
 int		ft_db_error(int code, char *str);

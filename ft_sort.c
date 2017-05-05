@@ -2,10 +2,8 @@
 
 int	ft_row_str_cmp(void *thunk, const void *row1, const void *row2)
 {
-	t_data	*val1;
-	t_data	*val2;
-	int		fld_ind;
-	int		asc_dsc;
+	t_data	*val1, *val2;
+	int		fld_ind, asc_dsc;
 
 	asc_dsc = (*(int*)thunk > 0 ? 1 : -1);
 	fld_ind = (*(int*)thunk) * asc_dsc - 1;
@@ -21,10 +19,8 @@ int	ft_row_str_cmp(void *thunk, const void *row1, const void *row2)
 
 int	ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
 {
-	t_data	*val1;
-	t_data	*val2;
-	int		fld_ind;
-	int		asc_dsc;
+	t_data	*val1, *val2;
+	int		fld_ind, asc_dsc;
 
 	asc_dsc = (*(int*)thunk > 0 ? 1 : -1);
 	fld_ind = (*(int*)thunk) * asc_dsc - 1;
@@ -49,7 +45,7 @@ int	ft_sort(char *buffer)
 	if (ft_deserialize_tab(tab.name, &tab))
 		return(-1);
 	args = ft_get_args(buffer);
-	if (!args)
+	if (!args || *(args[0]) == '\0')
 		return (ft_db_error(2, ""));
 	ft_order_tab(args, &tab);
 	ft_arrdel2(args);

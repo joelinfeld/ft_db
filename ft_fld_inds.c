@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:55:15 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 17:57:09 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 14:33:04 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	*ft_get_fld_inds(char **fld_args, int *arg_cnt, t_table tab)
 {
 	int *fld_inds;
-	int i;
-	int j;
+	int i, j;
 
 	*arg_cnt = ft_arrlen2(fld_args);
 	if (*arg_cnt == 1 && ft_strequ(fld_args[0], "*"))
@@ -29,13 +28,11 @@ int	*ft_get_fld_inds(char **fld_args, int *arg_cnt, t_table tab)
 		{
 			j = -1;
 			while (++j < tab.col_cnt)
-			{//
 				if (ft_strequ(fld_args[i], tab.flds[j].name))
 				{
 					fld_inds[i] = j;
 					break ;
 				}
-			}//
 			if (j == tab.col_cnt)
 				return (ft_no_fld_match(fld_inds, fld_args[i], tab.name));
 		}

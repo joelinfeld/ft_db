@@ -24,9 +24,7 @@ int	*ft_get_matches(t_table tab, char **args, int arg_cnt, int *match_cnt)
 {
 	int		*row_inds;
 	char	**split;
-	int		fld_i;
-	int 	i;
-	int 	j;
+	int		fld_ind, i, j;
 
 	row_inds = NULL;
 	*match_cnt = 0;
@@ -39,10 +37,10 @@ int	*ft_get_matches(t_table tab, char **args, int arg_cnt, int *match_cnt)
 			split = ft_strsplit(args[j],  ' ');
 			if (ft_arrlen2(split) != 3)
 				return (NULL);
-			fld_i = ft_get_fld_ind(split[0], tab);
-			if (fld_i < 0)
+			fld_ind = ft_get_fld_ind(split[0], tab);
+			if (fld_ind < 0)
 				return (NULL);
-			if (!ft_is_match(tab.rows[i][fld_i], tab.flds[fld_i].type, split[1], split[2]))
+			if (!ft_is_match(tab.rows[i][fld_ind], tab.flds[fld_ind].type, split[1], split[2]))
 				break ;
 		}
 		if (j == arg_cnt)

@@ -1,5 +1,4 @@
 #include "ft_db.h"
-//fix memory leaks handle errors add dbls sort format display matchnmatch
 
 int		ft_handle_command(char *buffer)
 {	

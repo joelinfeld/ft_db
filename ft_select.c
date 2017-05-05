@@ -6,10 +6,8 @@ int		ft_select(char *buffer)
 {
 	t_table tab;
 	char	**args;
-	int		*fld_inds;
-	int		*row_inds;
-	int		fld_cnt;
-	int		row_cnt;
+	int		*fld_inds, *row_inds;
+	int		fld_cnt, row_cnt;
 
 	if (ft_parse_function(buffer, &tab, &args) > 0)
 		return (0);

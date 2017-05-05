@@ -59,11 +59,9 @@ int	ft_get_insert_cnt(void)
 	
 void	ft_add_row_to_tab(char **val_args, int *fld_inds, t_table *tab)
 {
-	int 	val_cnt;
 	char 	*trimmed;
 	t_data	**row;
-	int 	i;
-	int 	j;
+	int 	val_cnt, i, j;
 
 	tab->row_cnt++;
 	tab->rows = (t_data***)realloc(tab->rows, sizeof(t_data**) * (tab->row_cnt));

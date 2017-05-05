@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:40 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 16:55:08 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/05 14:32:20 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ int	*ft_get_col_widths(int *fld_inds,int fld_cnt, int *row_inds, int row_cnt, t_
 	int		*col_widths;
 	t_data	*value;
 	char	*type;
-	int		len;
-	int 	i;
-	int 	j;
+	int		len, i, j;
 
 	col_widths = (int*)ft_malloc(sizeof(int) * fld_cnt);
 	i = -1;
@@ -85,8 +83,7 @@ void	ft_display_rows(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_t
 {
 	t_data	**row;
 	int		*col_widths;
-	int		i;
-	int		j;
+	int		i, j;
 
 	col_widths = ft_get_col_widths(fld_inds, fld_cnt, row_inds, row_cnt, tab);
 	i = -1;
