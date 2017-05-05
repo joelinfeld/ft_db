@@ -6,11 +6,15 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:36:45 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 19:01:16 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 22:11:21 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_db.h"
+int			int_comp(const void *a, const void *b)
+{
+	return (*(int*)b - *(int*)a);
+}
 
 void		ft_delete_cols(char *buffer)
 {
@@ -27,6 +31,7 @@ void		ft_delete_cols(char *buffer)
 	fld_inds = ft_get_fld_inds(args, &arg_cnt, tab);
 	if (!fld_inds)
 		return ;
+	qsort(fld_inds, arg_cnt, sizeof(int), int_comp);
 	ft_arrdel2(args);
 	i = -1;
 	//will need to consider reallocing fields and rows.  first going to move them around then worry about that.
