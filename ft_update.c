@@ -6,9 +6,10 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:40:03 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 21:39:21 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/04 22:38:30 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_db.h"
 
 void		ft_update(char	*buffer)
@@ -38,7 +39,10 @@ void		ft_update(char	*buffer)
 	while (i < row_cnt)
 	{
 		row_i = row_inds[i];
-		ft_printf("Update for %s: %d >> ", tab.flds[0].name, tab.rows[row_i][0]->i); 
+		if (ft_strequ(tab.flds[0].type, "str"))
+			ft_printf("Update (%d of %d) for %s: %s >> ", i + 1, row_cnt, tab.flds[0].name, tab.rows[row_i][0]->str);
+		else if (ft_strequ(tab.flds[0].type, "int"))
+			ft_printf("Update (%d of %d) for %s: %d >> ", i + 1, row_cnt, tab.flds[0].name, tab.rows[row_i][0]->i);
 		ft_gnl(0, &input);
 		val_args = ft_get_args(input); //free?
 		if (!val_args)
