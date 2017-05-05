@@ -33,7 +33,7 @@ void	ft_populate_new_rows(int *fld_inds, int fld_cnt, t_table *tab)
 		val_args = ft_get_args(buffer);
 		if (!val_args)
 		{
-			free(buffer);
+			ft_db_error(2, "");
 			continue ;
 		}
 		if (ft_wrong_arg_cnt(val_args, fld_cnt, buffer))

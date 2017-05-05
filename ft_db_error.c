@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:10:12 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 19:36:42 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/04 21:20:23 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_db_error(int code, char *str)
 	else if (code == 4)
 		ft_printf("Primary Column \"%s\" Can't Be Deleted\n", str);
 	else if (code == 5)
-		ft_printf("Field \"%s\" Does Not Exist", str);
+		ft_printf("Field \"%s\" Does Not Exist\n", str);
 	else if (code == 6)
 		ft_printf("Incorrect Amount of Values\n");
 	else if (code == 7)

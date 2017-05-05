@@ -38,6 +38,8 @@ int		ft_init_tab_flds(t_table *tab, char **args)
 			return (ft_db_error(3, split[1]));//free fields and splits
 		if (ft_repeated_field(split[0], i, tab->flds))
 			return (ft_db_error(9, split[0]));
+		if (ft_strchr(split[0], '\t'))
+			return (ft_db_error(2, ""));
 		tab->flds[i].name = ft_strdup(split[0]);
 		
 		tab->flds[i].type = ft_strdup(split[1]);

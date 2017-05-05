@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:40:03 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 17:46:01 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 21:39:21 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_db.h"
@@ -28,17 +28,24 @@ void		ft_update(char	*buffer)
 	
 	if (ft_parse_function(buffer, &tab, &fld_args) > 0)
 		return ;
-	fld_inds = ft_get_fld_inds(fld_args, &fld_cnt, tab); 
+	fld_inds = ft_get_fld_inds(fld_args, &fld_cnt, tab);
+   	if (!fld_inds)
+		return ;	
 	row_inds = ft_where(buffer, &row_cnt, tab);
 	if (!row_inds)
 		return ;
-	i = -1;
-	while (++i < row_cnt)
+	i = 0;
+	while (i < row_cnt)
 	{
 		row_i = row_inds[i];
-		ft_printf("Update for %s: %d >>", tab.flds[0].name, tab.rows[row_i][0]->i); 
+		ft_printf("Update for %s: %d >> ", tab.flds[0].name, tab.rows[row_i][0]->i); 
 		ft_gnl(0, &input);
 		val_args = ft_get_args(input); //free?
+		if (!val_args)
+		{
+			ft_db_error(2, "");
+			continue ;
+		}
 		j = -1;
 		while (++j < fld_cnt)
 		{
@@ -54,7 +61,8 @@ void		ft_update(char	*buffer)
 				tab.rows[row_i][fld_i]->i = ft_atoi(val_args[j]);
 			else if (ft_strequ(tab.flds[fld_i].type, "str"))
 				tab.rows[row_i][fld_i]->str = ft_strdup(val_args[j]);
-		}	
+		}
+		i++;
 	}
 	ft_serialize_tab(tab);
 }

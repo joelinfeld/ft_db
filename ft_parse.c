@@ -25,6 +25,8 @@ char	**ft_get_args(char *buffer)
 	char	*trimmed;
 	int		i;
 
+	if (!ft_strchr(buffer, '('))
+		return (NULL);
 	arg_str = ft_strchr(buffer, '(') + 1;
 	bracket_pnt = ft_strchr(arg_str, ')');
 	if (!bracket_pnt)
