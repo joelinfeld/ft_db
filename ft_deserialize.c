@@ -6,25 +6,26 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:30 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 16:54:32 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 18:43:45 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_db.h"
 
-t_table	ft_deserialize_tab(char *tab_name)
+int		ft_deserialize_tab(char *tab_name, t_table *tab)
 {
 	int	fd;
-	t_table tab;
-
+	
+	if(access(tab_name, F_OK) == -1)
+		return (ft_db_error(7, tab_name));
 	fd = ft_open(tab_name);
-	tab = ft_deserialize_tab_data(fd);
-	tab.rows = ft_deserialize_rows(fd, tab);
+	*tab = ft_deserialize_tab_data(fd);
+	tab->rows = ft_deserialize_rows(fd, *tab);
 	ft_close(fd);
-	return (tab);
+	return (0);
 }
 
-t_table	ft_deserialize_tab_data(int	fd)
+t_table		ft_deserialize_tab_data(int	fd)
 {
 	t_table tab;
 	char 	*buffer;

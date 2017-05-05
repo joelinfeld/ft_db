@@ -6,18 +6,17 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 17:56:04 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/04 18:47:27 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_DB_H
-#define FT_DB_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include "libft.h"
+# define FT_DB_H
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include "libft.h"
 
 //union that contains cell data, currently either int or str.
 typedef union 	u_data
@@ -25,15 +24,12 @@ typedef union 	u_data
 	int 	i;
 	char 	*str;
 }				t_data;
-
 //struct that contains metadata of the fields in a table
 typedef struct	s_field
 {
 	char *name;
 	char *type;
 }				t_field;
-
-
 //table that consits of a 2D cell array and a table data struct.
 typedef struct		s_table
 {
@@ -43,8 +39,6 @@ typedef struct		s_table
 	t_field		*flds;
 	t_data		***rows;
 }					t_table;
-
-
 //ft_create_table.c
 int		ft_create_table(char *buffer);
 int		ft_init_tab_flds(t_table *tab, char **args);
@@ -78,15 +72,15 @@ void	ft_serialize_rows(FILE *fp, t_table tab);
 void    ft_typrint(char *type, t_data *value, FILE *fp);
 
 //ft_deserialize.c
-t_data	***ft_deserialize_rows(int fd, t_table tab);
-t_table ft_deserialize_tab_data(int fd);
-t_table	ft_deserialize_tab(char *tab_name);
-char *ft_get_tab_name(char *name_data);
-t_field *ft_get_tab_flds(char *fld_data, int col_cnt);
-t_data *ft_get_value(char *type, char *cell_str);
+t_data		***ft_deserialize_rows(int fd, t_table tab);
+t_table		ft_deserialize_tab_data(int fd);
+int			ft_deserialize_tab(char *tab_name, t_table *tab);
+char		*ft_get_tab_name(char *name_data);
+t_field		*ft_get_tab_flds(char *fld_data, int col_cnt);
+t_data		*ft_get_value(char *type, char *cell_str);
 
 //ft_select.c
-void	ft_select(char *buffer);
+int		ft_select(char *buffer);
 void	ft_display_rows(int *fld_inds, int fld_cnt, int *row_indss, int row_cnt, t_table tab);
 
 //ft_where.c
@@ -103,9 +97,9 @@ void	ft_insert_cols(char *buffer);
 void	ft_update(char *buffer);
 
 //ft_sort.c
-void	ft_sort(char *buffer);
-int ft_row_int_cmp(void *thunk, const void *row1, const void *row2);
-int ft_row_str_cmp(void *thunk, const void *row1, const void *row2);
+int		ft_sort(char *buffer);
+int		ft_row_int_cmp(void *thunk, const void *row1, const void *row2);
+int		ft_row_str_cmp(void *thunk, const void *row1, const void *row2);
 
 
 //ft_delete_rows.c
@@ -118,7 +112,7 @@ void	ft_delete_cols(char *buffer);
 int		ft_db_error(int code, char *str);
 
 //ft_order_by.c
-void    ft_order_tab(char **args, t_table *tab);
+int		ft_order_tab(char **args, t_table *tab);
 int 	ft_order_by(char *buffer, t_table *tab);
 
 #endif

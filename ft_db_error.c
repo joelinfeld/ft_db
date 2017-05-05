@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:10:12 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 18:02:01 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/04 18:49:43 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int		ft_db_error(int code, char *str)
 		ft_printf("Field \"%s\" Does Not Exist", str);
 	else if (code == 6)
 		ft_printf("Incorrect amount of values\n");
+	else if (code == 7)
+		ft_printf("Table \"%s\" Does Not Exist\n", str);
 	return (code);
 }

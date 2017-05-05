@@ -27,5 +27,3 @@ int		ft_select(char *buffer)
 	ft_arrdel2(args);
 	return (0);
 }
-
-

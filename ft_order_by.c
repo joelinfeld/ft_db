@@ -24,9 +24,8 @@ int	ft_order_tab(char **args, t_table *tab)
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_str_cmp);
 	else if (ft_strequ(tab->flds[fld_ind].type, "int"))
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_int_cmp);
+	return (0);
 }
-
-
 
 int	ft_order_by(char *buffer, t_table *tab)
 {
@@ -48,8 +47,3 @@ int	ft_order_by(char *buffer, t_table *tab)
 	ft_order_tab(args, tab);
 	return (0);
 }
-	
-
-
-	
-

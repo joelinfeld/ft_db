@@ -19,7 +19,6 @@ int	ft_row_str_cmp(void *thunk, const void *row1, const void *row2)
 	return(asc_dsc * ft_strcmp(val1->str, val2->str));
 }
 
-
 int	ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
 {
 	t_data	*val1;
@@ -39,9 +38,6 @@ int	ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
 	return(asc_dsc * (val1->i - val2->i));
 }
 
-
-
-
 int	ft_sort(char *buffer)
 {
 	t_table tab;
@@ -50,15 +46,11 @@ int	ft_sort(char *buffer)
 	tab.name = ft_get_outer_str(buffer);
 	if (!tab.name)
 		return (ft_db_error(2, "")); //free name?
-	tab = ft_deserialize_tab(tab.name);
+	if (ft_deserialize_tab(tab.name, &tab))
+		return(-1);
 	args = ft_get_args(buffer);
 	ft_order_tab(args, &tab);
 	ft_arrdel2(args);
 	ft_serialize_tab(tab);
 	return (0);
 }
-	
-
-
-
-

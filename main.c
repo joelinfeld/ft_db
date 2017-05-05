@@ -2,8 +2,12 @@
 //fix memory leaks handle errors add dbls sort format display matchnmatch
 
 int		ft_handle_command(char *buffer)
-{
-	if (ft_check_str_begin(buffer, "CREATE TABLE "))
+{	
+	if (ft_strequ(buffer, ""))
+		return (0);
+	else if (ft_strequ(buffer, "EXIT") || ft_strequ(buffer, "QUIT"))
+		exit(0);
+	else if (ft_check_str_begin(buffer, "CREATE TABLE "))
 		ft_create_table(buffer + ft_strlen("CREATE TABLE "));
 	else if (ft_check_str_begin(buffer, "INSERT ROWS "))
 		ft_insert_rows(buffer + ft_strlen("INSERT ROWS "));
