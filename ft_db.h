@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 19:37:42 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/04 20:37:03 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		*ft_all_row_inds(int row_cnt, int *match_cnt);
 
 
 //ft_insert_column.c
-void	ft_insert_cols(char *buffer);
+int		ft_insert_cols(char *buffer);
 
 //ft_update.c
 void	ft_update(char *buffer);
