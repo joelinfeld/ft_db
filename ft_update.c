@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:40:03 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 22:38:30 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 23:08:03 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		ft_update(char	*buffer)
 			ft_db_error(2, "");
 			continue ;
 		}
+		if (ft_wrong_arg_cnt(val_args, fld_cnt, input) > 0)
+			continue ;
 		j = -1;
 		while (++j < fld_cnt)
 		{
