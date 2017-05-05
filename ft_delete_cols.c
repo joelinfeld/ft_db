@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:36:45 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/04 16:41:49 by jinfeld          ###   ########.fr       */
+/*   Updated: 2017/05/04 19:01:16 by jinfeld          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void		ft_delete_cols(char *buffer)
 	if (ft_parse_function(buffer, &tab, &args) > 0)
 		return ;
 	fld_inds = ft_get_fld_inds(args, &arg_cnt, tab);
+	if (!fld_inds)
+		return ;
 	ft_arrdel2(args);
 	i = -1;
 	//will need to consider reallocing fields and rows.  first going to move them around then worry about that.
