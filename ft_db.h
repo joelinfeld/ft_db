@@ -1,5 +1,16 @@
-#ifndef FT_DB_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_db.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
+/*   Updated: 2017/05/04 16:36:06 by jinfeld          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef FT_DB_H
 #define FT_DB_H
 
 #include <stdio.h>
@@ -35,7 +46,7 @@ typedef struct		s_table
 
 
 //ft_create_table.c
-void	ft_create_table(char *buffer);
+int		ft_create_table(char *buffer);
 int		ft_init_tab_flds(t_table *tab, char **args);
 int		ft_validate_type(char *type);
 
@@ -100,5 +111,7 @@ void	ft_delete_rows(char *buffer);
 //ft_delete_column.c
 void	ft_delete_cols(char *buffer);
 
+//ft_db_error
+int		ft_db_error(int code, char *str);
 
 #endif

@@ -1,7 +1,16 @@
-//I WANT TO USE FT_GNL INSTEADS OF FGETS, BUT NEED AN FD INSTEAD OF FP, BUT FPRINTF TAKES FP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_deserialize.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/04 16:54:30 by jinfeld           #+#    #+#             */
+/*   Updated: 2017/05/04 16:54:32 by jinfeld          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
-
-
 
 t_table	ft_deserialize_tab(char *tab_name)
 {
@@ -14,8 +23,6 @@ t_table	ft_deserialize_tab(char *tab_name)
 	ft_close(fd);
 	return (tab);
 }
-
-
 
 t_table	ft_deserialize_tab_data(int	fd)
 {
@@ -33,10 +40,6 @@ t_table	ft_deserialize_tab_data(int	fd)
 	return (tab);
 }
 
-
-
-
-
 char *ft_get_tab_name(char *name_data)
 {
 	int len;
@@ -45,8 +48,6 @@ char *ft_get_tab_name(char *name_data)
 	name_data = ft_strchr(name_data, '\"') + 1;
 	return (ft_strndup(name_data, len));
 }
-
-
 
 t_field *ft_get_tab_flds(char *fld_data, int col_cnt)
 {
@@ -68,8 +69,6 @@ t_field *ft_get_tab_flds(char *fld_data, int col_cnt)
 	}
 	return (flds);
 }
-
-
 
 t_data	***ft_deserialize_rows(int fd, t_table tab)
 {
@@ -112,8 +111,3 @@ t_data *ft_get_value(char *type, char *cell_str)
 	}
 	return (value);
 }
-
-
-
-
-

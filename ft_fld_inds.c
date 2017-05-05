@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_fld_inds.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/04 16:55:15 by jinfeld           #+#    #+#             */
+/*   Updated: 2017/05/04 17:15:54 by jinfeld          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
 int	*ft_get_fld_inds(char **fld_args, int *arg_cnt, t_table tab)
@@ -39,10 +51,9 @@ int	ft_get_fld_ind(char *fld, t_table tab)
 	while (++i < tab.col_cnt)
 		if (ft_strequ(tab.flds[i].name, fld))
 			return (i);
-	ft_printf("Error: No field \"%s\" in Table \"%s\"\n", fld, tab.name);
+	ft_db_error(5, fld);
 	return (-1);
 }
-
 
 int	*ft_all_fld_inds(int col_cnt, int *fld_cnt)
 {
@@ -57,15 +68,9 @@ int	*ft_all_fld_inds(int col_cnt, int *fld_cnt)
 	return (cols);
 }
 
-
-
 void	*ft_no_fld_match(int *inds, char *fld_name, char *tab_name)
 {
-	ft_printf("Error: No Field \"%s\" in Table \"%s\"\n", fld_name, tab_name);
+	ft_db_error(5, fld_name)
 	free(inds);
 	return (NULL);
 }
-
-
-
-

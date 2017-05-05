@@ -7,24 +7,15 @@ char	*ft_get_outer_str(char *buffer)
 
 	bracket_pnt = ft_strchr(buffer, '(');
 	if (!bracket_pnt)
-	{
-		ft_printf("Missing \"(\"\n");
 		return (NULL);
-	}
 	bracket_pnt[0] = '\0';
 	outer_str = ft_strtrim(buffer);
+	//free(outer_str);
 	if (!*outer_str || ft_strchr(outer_str, ' ') || ft_strchr(outer_str, '\t'))
-	{
-		ft_printf("Format Error\n");
-		//free(outer_str);
 		return (NULL);
-	}
 	bracket_pnt[0] = '(';
 	return (outer_str);
 }
-
-
-
 
 char	**ft_get_args(char *buffer)
 {
@@ -37,10 +28,7 @@ char	**ft_get_args(char *buffer)
 	arg_str = ft_strchr(buffer, '(') + 1;
 	bracket_pnt = ft_strchr(arg_str, ')');
 	if (!bracket_pnt)
-	{
-		ft_printf("Format Error\n");
 		return (NULL);
-	}
 	bracket_pnt[0] = '\0';
 	split_args = ft_strsplit(arg_str, ',');
 	if (!split_args[0])
@@ -60,25 +48,19 @@ char	**ft_get_args(char *buffer)
 	return (split_args);
 }
 
-
-
 int	ft_parse_function(char *buffer, t_table *tab, char ***args)
 {
 	char	*table_name;
 
 	table_name = ft_get_outer_str(buffer);
 	if (!table_name)
-		return (-1); //free name?
+		return (ft_db_error(2, "")); //free name?
 	*tab = ft_deserialize_tab(table_name);
 	*args = ft_get_args(buffer);
 	if (!*args)
-		return (-1); //free stuff?
+		return (ft_db_error(2, "")); //free stuff?
 	return (0);
 }
-
-
-
-
 
 int	ft_check_str_begin(char *buffer, char *str)
 {
@@ -87,4 +69,3 @@ int	ft_check_str_begin(char *buffer, char *str)
 	else
 		return (0);
 }
-

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_delete_cols.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/04 16:36:45 by jinfeld           #+#    #+#             */
+/*   Updated: 2017/05/04 16:41:49 by jinfeld          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
 void		ft_delete_cols(char *buffer)
@@ -10,7 +22,7 @@ void		ft_delete_cols(char *buffer)
 	int			j;
 	int			index;
 
-	if (ft_parse_function(buffer, &tab, &args) < 0)
+	if (ft_parse_function(buffer, &tab, &args) > 0)
 		return ;
 	fld_inds = ft_get_fld_inds(args, &arg_cnt, tab);
 	ft_arrdel2(args);
@@ -38,7 +50,7 @@ void		ft_delete_cols(char *buffer)
 			tab.col_cnt -= 1;
 		}
 		else
-			ft_printf("Primary column %s can't be deleted\n", tab.flds[0].name);
+			ft_db_error(4, tab.flds[0].name);
 	}
 	ft_serialize_tab(tab);
 }

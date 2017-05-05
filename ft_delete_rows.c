@@ -10,11 +10,10 @@ void		ft_delete_rows(char *buffer)
 	int			del_row_cnt;
 	int			index;
 
-	if (ft_parse_function(buffer, &tab, &args) < 0)
+	if (ft_parse_function(buffer, &tab, &args) > 0)
 		return ;
 	ft_arrdel2(args);
-	row_inds = ft_where(buffer, &del_row_cnt, tab);
-	if (!row_inds)
+	if (!(row_inds = ft_where(buffer, &del_row_cnt, tab)))
 		return ;
 	i = -1;
 	while (++i < del_row_cnt)
@@ -28,9 +27,7 @@ void		ft_delete_rows(char *buffer)
 			if (tab.rows[index][j])
 				free(tab.rows[index][j]);
 			if (index != tab.row_cnt - 1)
-				tab.rows[index][j] = tab.rows[tab.row_cnt - 1][j];//need to copy it in, otherwise freeing netx frees this or just dont free it
-	//		if (tab.rows[tab.row_cnt - 1][j])
-	//			free(tab.rows[tab.row_cnt - 1][j]);
+				tab.rows[index][j] = tab.rows[tab.row_cnt - 1][j];
 		}
 		tab.row_cnt -= 1;
 	}

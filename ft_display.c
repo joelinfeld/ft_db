@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_display.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/04 16:54:40 by jinfeld           #+#    #+#             */
+/*   Updated: 2017/05/04 16:55:08 by jinfeld          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
 int	*ft_get_col_widths(int *fld_inds,int fld_cnt, int *row_inds, int row_cnt, t_table tab)
@@ -47,9 +59,6 @@ void	ft_display_hor_line(int *col_widths, int fld_cnt)
 	printf("\n");
 }
 
-
-
-
 void	ft_display_table_header(int *fld_inds, int fld_cnt, int *col_widths, t_table tab)
 {
 	int	pad;
@@ -71,9 +80,6 @@ void	ft_display_table_header(int *fld_inds, int fld_cnt, int *col_widths, t_tabl
 	printf("|\n");
 	ft_display_hor_line(col_widths, fld_cnt);
 }
-
-
-
 
 void	ft_display_rows(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_table tab)
 {
