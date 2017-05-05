@@ -49,6 +49,8 @@ int	ft_sort(char *buffer)
 	if (ft_deserialize_tab(tab.name, &tab))
 		return(-1);
 	args = ft_get_args(buffer);
+	if (!args)
+		return (ft_db_error(2, ""));
 	ft_order_tab(args, &tab);
 	ft_arrdel2(args);
 	ft_serialize_tab(tab);

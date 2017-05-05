@@ -44,6 +44,8 @@ int	ft_order_by(char *buffer, t_table *tab)
 	args = ft_get_args(trimmed);
 	if (!args)
 		return (-1);
+	if (ft_arrlen2(args) != 1)
+		return (ft_db_error(2, ""));
 	ft_order_tab(args, tab);
 	return (0);
 }
