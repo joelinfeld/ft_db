@@ -1,4 +1,4 @@
-#include "ft_db.h" //all rows just return NULL and be same as none
+#include "ft_db.h" //what happens on WHERE dfsdgd (i = 2) or ORDER BY dafsf (name asc)? do a get outer str and test that for where and order by, then do args...
 
 int	*ft_where(char *buffer, int *match_cnt, t_table tab)
 {
@@ -7,11 +7,11 @@ int	*ft_where(char *buffer, int *match_cnt, t_table tab)
 	int		arg_cnt;
 
 	trimmed = ft_strtrim(ft_strchr(buffer, ')') + 1);//do all check here
-	if (ft_strlen(trimmed) == 0)
+	if (ft_strlen(trimmed) == 0 || ft_check_str_begin(trimmed, "ORDER BY"))
 		return (ft_all_row_inds(tab.row_cnt, match_cnt));
 	if (!ft_check_str_begin(trimmed, "WHERE"))
 		return (NULL);
-	args = ft_get_args(trimmed + 5);
+	args = ft_get_args(trimmed);
 	if (!args)
 		return (NULL);
 	arg_cnt = ft_arrlen2(args);

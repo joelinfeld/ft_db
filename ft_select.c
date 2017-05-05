@@ -19,7 +19,12 @@ void	ft_select(char *buffer)
 	row_inds = ft_where(buffer, &row_cnt, tab);
 	if (!row_inds)
 	{
-		ft_printf("WHERE Clause Formal Error\n");
+		ft_printf("WHERE Clause Format Error\n");
+		return ;
+	}
+	if (ft_order_by(buffer, &tab) < 0)
+	{
+		ft_printf("Format Error");
 		return ;
 	}
 	ft_display_rows(fld_inds, fld_cnt, row_inds, row_cnt, tab);
@@ -27,8 +32,5 @@ void	ft_select(char *buffer)
 	free(row_inds);
 	ft_arrdel2(args);
 }
-
-
-
 
 
