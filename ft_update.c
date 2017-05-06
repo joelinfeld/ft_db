@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:40:03 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 17:42:34 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:00:56 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ char	**ft_get_update_vals(int row_ind, int i, int row_cnt, int fld_cnt, t_table 
 	char	*buffer;
 
 	if (!tab.rows[row_ind][0])
-		ft_printf("Update (%d of %d) for %s: (null) >> ",
+		ft_printf("\x1b[38;2;115;190;255mUpdate (%d of %d) for \"%s\" : (null) >> \x1b[0m",
 				i + 1, row_cnt, tab.flds[0].name);
 	else if (ft_strequ(tab.flds[0].type, "str"))
-		ft_printf("Update (%d of %d) for %s: %s >> ",
+		ft_printf("\x1b[38;2;115;190;255mUpdate (%d of %d) for \"%s\" : %s >> \x1b[0m",
 				i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->str);
 	else if (ft_strequ(tab.flds[0].type, "int"))
-		ft_printf("Update (%d of %d) for %s: %d >> ",
+		ft_printf("\x1b[38;2;115;190;255mUpdate (%d of %d) for \"%s\" : %d >> \x1b[0m",
 				i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->i);
 	ft_gnl(0, &buffer);
 	val_args = ft_get_args(buffer);

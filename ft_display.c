@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:40 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 17:35:11 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:09:07 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ void	ft_display_hor_line(int *col_widths, int fld_cnt)
 	int i;
 
 	total = fld_cnt + 1;
+	printf("\x1b[38;2;115;190;255m");
 	i = -1;
 	while (++i < fld_cnt)
 		total += 4 + col_widths[i];
 	i = -1;
 	while (++i < total)
 		printf("=");
-	printf("\n");
+	printf("\n\x1b[0m");
 }
 
 void	ft_display_table_header(int *fld_inds, int fld_cnt, int *col_widths, t_table tab)
@@ -73,9 +74,10 @@ void	ft_display_table_header(int *fld_inds, int fld_cnt, int *col_widths, t_tabl
 		l_pad = pad / 2;
 		if (pad % 2)
 			l_pad++;
-		printf("|%*s%*s", l_pad + len, tab.flds[fld_inds[i]].name, pad / 2, ""); 
+		printf("\x1b[38;2;115;190;255m|\x1b[0m");
+		printf("%*s%*s", l_pad + len, tab.flds[fld_inds[i]].name, pad / 2, ""); 
 	}
-	printf("|\n");
+	printf("\x1b[38;2;115;190;255m|\x1b[0m\n");
 	ft_display_hor_line(col_widths, fld_cnt);
 }
 
@@ -95,13 +97,15 @@ void	ft_display_rows(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_t
 		while (++j < fld_cnt)
 		{
 			if (!row[fld_inds[j]])
-				printf("|   %*s ", col_widths[j], "NULL");
+				printf("\x1b[38;2;115;190;255m|\x1b[0m   %*s ", col_widths[j], "NULL");
 			else if (ft_strequ(tab.flds[fld_inds[j]].type, "int"))
-				printf("|   %*d ", col_widths[j], row[fld_inds[j]]->i);
+				printf("\x1b[38;2;115;190;255m|\x1b[0m   %*d ",
+						col_widths[j], row[fld_inds[j]]->i);
 			else if (ft_strequ(tab.flds[fld_inds[j]].type, "str"))
-				printf("|   %*s ", col_widths[j], row[fld_inds[j]]->str);
+				printf("|\x1b[38;2;115;190;255m|\x1b[0m   %*s ",
+						col_widths[j], row[fld_inds[j]]->str);
 		}
-		printf("|\n");
+		printf("\x1b[38;2;115;190;255m|\x1b[0m\n");
 	}
 	ft_display_hor_line(col_widths, fld_cnt);
 	free(col_widths);

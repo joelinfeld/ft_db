@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 17:10:54 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 17:10:55 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:01:54 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_populate_new_rows(int *fld_inds, int fld_cnt, t_table *tab)
 	i = 0;
 	while (i < row_cnt)
 	{
-		ft_printf("INSERTION #%d >> ", i + 1);
+		ft_printf("\x1b[38;2;115;190;255mINSERTION #%d >> \x1b[0m", i + 1);
 		ft_gnl(0, &buffer);
 		val_args = ft_get_args(buffer);
 		if (!val_args)
@@ -64,7 +64,7 @@ int		ft_get_insert_cnt(void)
 	char 	*buffer;
 	int		row_count;
 
-	ft_printf("# OF ROWS TO INSERT >> ");
+	ft_printf("\x1b[38;2;115;190;255m# OF ROWS TO INSERT >> \x1b[0m");
 	ft_gnl(0, &buffer);
 	row_count = ft_atoi(buffer);
 	free(buffer);

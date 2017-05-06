@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 17:11:59 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 17:12:03 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:09:23 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(void)
 
 	while (1)
 	{
-		ft_printf(">> ");
+		ft_printf("\x1b[38;2;115;190;255m>> \x1b[0m");
 		ft_gnl(0, &buffer);
 		ft_handle_command(buffer);
 		free(buffer);
