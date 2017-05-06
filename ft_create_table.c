@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 17:09:24 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 17:09:26 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:14:19 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int		ft_validate_type(char *type)
 	if (ft_strequ(type, "int"))
 		valid = 1;
 	else if (ft_strequ(type, "str"))
+		valid = 1;
+	else if (ft_strequ(type, "flt"))
 		valid = 1;
 	return (valid);
 }

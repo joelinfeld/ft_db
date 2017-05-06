@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:40:03 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 18:00:56 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:25:31 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	ft_update_rows(t_table *tab, int *fld_inds, int fld_cnt, int *row_inds, int
 			}
 			else if (ft_strequ(tab->flds[fld_inds[j]].type, "int"))
 				tab->rows[row_inds[i]][fld_inds[j]]->i = ft_atoi(val_args[j]);
+			else if (ft_strequ(tab->flds[fld_inds[j]].type, "flt"))
+				tab->rows[row_inds[i]][fld_inds[j]]->f = ft_atof(val_args[j]);
 			else if (ft_strequ(tab->flds[fld_inds[j]].type, "str"))
 				tab->rows[row_inds[i]][fld_inds[j]]->str = ft_strdup(val_args[j]);
 		}
@@ -81,6 +83,9 @@ char	**ft_get_update_vals(int row_ind, int i, int row_cnt, int fld_cnt, t_table 
 	else if (ft_strequ(tab.flds[0].type, "int"))
 		ft_printf("\x1b[38;2;115;190;255mUpdate (%d of %d) for \"%s\" : %d >> \x1b[0m",
 				i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->i);
+	else if (ft_strequ(tab.flds[0].type, "flt"))
+		ft_printf("\x1b[38;2;115;190;255mUpdate (%d of %d) for \"%s\" : %f >> \x1b[0m",
+				i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->f);
 	ft_gnl(0, &buffer);
 	val_args = ft_get_args(buffer);
 	if (!val_args || *(val_args[0]) == '\0')

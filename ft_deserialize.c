@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:30 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 17:31:58 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:18:58 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ t_data	*ft_get_value(char *type, char *cell_str)
 	value = (t_data*)ft_malloc(sizeof(t_data));
 	if (ft_strequ(type, "int"))
 		value->i = ft_atoi(cell_str);
+	else if (ft_strequ(type, "flt"))
+		value->f = ft_atof(cell_str);
 	else if (ft_strequ(type, "str"))
 	{
 		len = ft_atoi(cell_str);

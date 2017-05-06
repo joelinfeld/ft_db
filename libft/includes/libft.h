@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 10:23:42 by biremong          #+#    #+#             */
-/*   Updated: 2017/03/15 14:03:16 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:32:32 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ long long		ft_power(int base, unsigned int exp);
 int				ft_printf(const char *format, ...);
 void			*ft_malloc(size_t bytes);
 void			ft_str_tolower(char **str);
+double			ft_atof(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 17:06:26 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 17:08:31 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:46:40 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		*ft_where(char *buffer, int *match_cnt, t_table tab)
 {
-	char	*trimmed;
+	char	*trimmed, *trimmed2;
 	char	**args;
 	int		arg_cnt;
 
@@ -23,8 +23,12 @@ int		*ft_where(char *buffer, int *match_cnt, t_table tab)
 		return (ft_all_row_inds(tab.row_cnt, match_cnt));
 	if (!ft_check_str_begin(trimmed, "WHERE"))
 		return (NULL);
-	args = ft_get_args(trimmed);
+	trimmed2 = ft_strtrim(trimmed + 5);
 	free(trimmed);
+	if (trimmed2[0] != '(')
+		return (NULL);
+	args = ft_get_args(trimmed2);
+	free(trimmed2);
 	if (!args)
 		return (NULL);
 	arg_cnt = ft_arrlen2(args);
@@ -82,6 +86,8 @@ int 	ft_is_match(t_data *row_val, char *type, char *op, char *cmp_val)
 		return (0);
 	else if (ft_strequ(type, "int"))
 		result = row_val->i - ft_atoi(cmp_val);
+	else if (ft_strequ(type, "flt"))
+		result = row_val->f - ft_atof(cmp_val);
 	else
 		result = ft_strcmp(row_val->str, cmp_val);
 	if (ft_strequ(op, "=") && result == 0)

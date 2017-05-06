@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:40 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 18:09:07 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:36:16 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		*ft_get_col_widths(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, 
 				len = 4;
 			else if (ft_strequ(type, "int"))
 				len = ft_strlen(ft_itoa(value->i));
+			else if (ft_strequ(type, "flt"))
+				len = ft_strlen(ft_itoa((int)value->f)) + 7;
 			else if (ft_strequ(type, "str"))
 				len = ft_strlen(value->str);
 			if (len > col_widths[i])
@@ -101,8 +103,11 @@ void	ft_display_rows(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_t
 			else if (ft_strequ(tab.flds[fld_inds[j]].type, "int"))
 				printf("\x1b[38;2;115;190;255m|\x1b[0m   %*d ",
 						col_widths[j], row[fld_inds[j]]->i);
+			else if (ft_strequ(tab.flds[fld_inds[j]].type, "flt"))
+				printf("\x1b[38;2;115;190;255m|\x1b[0m   %*f ",
+						col_widths[j], row[fld_inds[j]]->f);
 			else if (ft_strequ(tab.flds[fld_inds[j]].type, "str"))
-				printf("|\x1b[38;2;115;190;255m|\x1b[0m   %*s ",
+				printf("\x1b[38;2;115;190;255m|\x1b[0m   %*s ",
 						col_widths[j], row[fld_inds[j]]->str);
 		}
 		printf("\x1b[38;2;115;190;255m|\x1b[0m\n");

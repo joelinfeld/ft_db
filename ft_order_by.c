@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 17:11:01 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 17:11:02 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:46:30 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		ft_order_tab(char **args, t_table *tab)
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_str_cmp);
 	else if (ft_strequ(tab->flds[fld_ind].type, "int"))
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_int_cmp);
+	else if (ft_strequ(tab->flds[fld_ind].type, "flt"))
+		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_flt_cmp);
 	ft_arrdel2(split);
 	return (0);
 }
@@ -42,7 +44,7 @@ int		ft_order_tab(char **args, t_table *tab)
 int		ft_order_by(char *buffer, t_table *tab)
 {
 	char	*bracket_pnt;
-	char	*trimmed;
+	char	*trimmed, *trimmed2;
 	char	**args;
 
 	bracket_pnt = ft_strchr(buffer, ')') + 1;
@@ -53,11 +55,15 @@ int		ft_order_by(char *buffer, t_table *tab)
 		return (0);
 	if (!ft_check_str_begin(trimmed, "ORDER BY"))
 		return (-1);
-	args = ft_get_args(trimmed);
+	trimmed2 = ft_strtrim(trimmed + 8);
+	free(trimmed);
+	if (trimmed2[0] != '(')
+		return (-1);
+	args = ft_get_args(trimmed2);
 	if (!args || ft_arrlen2(args) != 1)
 		return (-1);
 	ft_order_tab(args, tab);
-	free(trimmed);
+	free(trimmed2);
 	ft_arrdel2(args);
 	return (0);
 }

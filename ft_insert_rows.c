@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 17:10:54 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 18:01:54 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:22:27 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	ft_add_row_to_tab(char **val_args, int *fld_inds, t_table *tab)
 			row[j] = (t_data*)ft_malloc(sizeof(t_data));
 			if (ft_strequ(tab->flds[j].type, "int"))
 				row[j]->i = ft_atoi(trimmed);
+			else if (ft_strequ(tab->flds[j].type, "flt"))
+				row[j]->f = ft_atof(trimmed);
 			else if (ft_strequ(tab->flds[j].type, "str"))
 				row[j]->str = ft_strdup(trimmed);
 		}

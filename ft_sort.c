@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 17:11:39 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 17:11:40 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:28:57 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,23 @@ int		ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
 	else if (!val1)
 		return (1);
 	return(asc_dsc * (val1->i - val2->i));
+}
+
+int		ft_row_flt_cmp(void *thunk, const void *row1, const void *row2)
+{
+	t_data	*val1, *val2;
+	int		fld_ind, asc_dsc;
+
+	asc_dsc = (*(int*)thunk > 0 ? 1 : -1);
+	fld_ind = (*(int*)thunk) * asc_dsc - 1;
+
+	val1 = (*(t_data***)row1)[fld_ind];
+	val2 = (*(t_data***)row2)[fld_ind];
+	if (!val2)
+		return (-1);
+	else if (!val1)
+		return (1);
+	return(asc_dsc * (val1->f - val2->f));
 }
 
 int		ft_sort(char *buffer)

@@ -6,7 +6,7 @@
 /*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 16:57:37 by biremong          #+#    #+#             */
-/*   Updated: 2017/05/05 17:40:42 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:24:17 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_typrint(char *type, t_data *value, FILE *fp)
 		fprintf(fp, "%c,", '~');
 	else if (ft_strequ(type, "int"))
 		fprintf(fp, "%d,", value->i);
+	else if (ft_strequ(type, "flt"))
+		fprintf(fp, "%f,", value->f);
 	else if (ft_strequ(type, "str"))
 		fprintf(fp, "%lu:\"%s\",", strlen(value->str), value->str);
 }

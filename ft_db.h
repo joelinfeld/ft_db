@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:34:22 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 17:43:32 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:29:23 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef union 	u_data
 {
 	int 	i;
+	float	f;
 	char 	*str;
 }				t_data;
 
@@ -159,6 +160,7 @@ void    ft_typrint(char *type, t_data *value, FILE *fp);
 int		ft_sort(char *buffer);
 int		ft_row_int_cmp(void *thunk, const void *row1, const void *row2);
 int		ft_row_str_cmp(void *thunk, const void *row1, const void *row2);
+int		ft_row_flt_cmp(void *thunk, const void *row1, const void *row2);
 
 /*
 **ft_update.c
