@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_select.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 17:11:19 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:11:20 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
-
-
 
 int		ft_select(char *buffer)
 {
@@ -20,6 +30,7 @@ int		ft_select(char *buffer)
 	if (!row_inds)
 		return(ft_db_error(2, ""));
 	ft_display_rows(fld_inds, fld_cnt, row_inds, row_cnt, tab);
+	ft_free_tab(tab);
 	free(fld_inds);
 	free(row_inds);
 	ft_arrdel2(args);

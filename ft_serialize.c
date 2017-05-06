@@ -1,8 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_serialize.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 16:57:37 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:40:42 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
-
-
-
-
 
 void	ft_serialize_tab(t_table tab)
 {
@@ -14,11 +22,7 @@ void	ft_serialize_tab(t_table tab)
 	fclose(fp);
 }
 
-
-
-
-
-void		ft_serialize_tab_data(FILE *fp, t_table tab)
+void	ft_serialize_tab_data(FILE *fp, t_table tab)
 {
 	int i;
 	
@@ -34,13 +38,9 @@ void		ft_serialize_tab_data(FILE *fp, t_table tab)
 	fprintf(fp, "%d\n", tab.row_cnt);
 }
 
-
-
-
-void		ft_serialize_rows(FILE *fp, t_table tab)
+void	ft_serialize_rows(FILE *fp, t_table tab)
 {
-	int		i;
-	int		k;
+	int	i, k;
 
 	i = -1;
 	while (++i < tab.row_cnt)
@@ -52,11 +52,7 @@ void		ft_serialize_rows(FILE *fp, t_table tab)
 	}
 }
 
-
-
-
-
-void		ft_typrint(char *type, t_data *value, FILE *fp)
+void	ft_typrint(char *type, t_data *value, FILE *fp)
 {
 	if (!value)
 		fprintf(fp, "%c,", '~');
@@ -65,6 +61,3 @@ void		ft_typrint(char *type, t_data *value, FILE *fp)
 	else if (ft_strequ(type, "str"))
 		fprintf(fp, "%lu:\"%s\",", strlen(value->str), value->str);
 }
-
-
-

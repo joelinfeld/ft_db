@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_delete_rows.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 17:09:56 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:30:12 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
-int	ft_delete_rows(char *buffer)
+int		ft_delete_rows(char *buffer)
 {
-	t_table		tab;
-	char		**args;
-	int			*row_inds;
-	int			del_row_cnt, i, j;
+	t_table	tab;
+	char	**args;
+	int		*row_inds;
+	int		del_row_cnt, i, j;
 
 	if (ft_parse_function(buffer, &tab, &args) > 0)
 		return (0);

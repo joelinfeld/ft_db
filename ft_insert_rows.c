@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_insert_rows.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 17:10:54 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:10:55 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
 void	ft_insert_rows(char *buffer)
@@ -12,9 +24,11 @@ void	ft_insert_rows(char *buffer)
 	fld_inds = ft_get_fld_inds(fld_args, &fld_cnt, tab);
 	if (!fld_inds)
 		return ;
-//	ft_arrdel2(field_args);//need to be freed, but having a prob?
 	ft_populate_new_rows(fld_inds, fld_cnt, &tab);
 	ft_serialize_tab(tab);
+	ft_free_tab(tab);
+	ft_arrdel2(fld_args);
+	free(fld_inds);
 }
 
 void	ft_populate_new_rows(int *fld_inds, int fld_cnt, t_table *tab)
@@ -45,7 +59,7 @@ void	ft_populate_new_rows(int *fld_inds, int fld_cnt, t_table *tab)
 	}
 }
 
-int	ft_get_insert_cnt(void)
+int		ft_get_insert_cnt(void)
 {
 	char 	*buffer;
 	int		row_count;
@@ -99,7 +113,7 @@ t_data	**ft_new_row(t_table tab)
 	return (row);
 }
 
-int	ft_wrong_arg_cnt(char **val_args, int fld_cnt, char *buffer)
+int		ft_wrong_arg_cnt(char **val_args, int fld_cnt, char *buffer)
 {
 	if (ft_arrlen2(val_args) != fld_cnt)
 	{

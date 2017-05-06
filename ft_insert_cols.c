@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:29:33 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 14:00:16 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:37:04 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ int		ft_insert_cols(char *buffer)
 			tab.rows[i][tab.col_cnt - new_col_cnt + j] = NULL;
 	}
 	ft_serialize_tab(tab);
+	ft_free_tab(tab);
+	ft_arrdel2(fld_args);
 	return (0);
 }
 
-
-int	ft_insert_fld(char *fld_arg, int new_col_cnt, int i, t_table *tab)
+int		ft_insert_fld(char *fld_arg, int new_col_cnt, int i, t_table *tab)
 {
 	char **split;
 
@@ -58,6 +59,6 @@ int	ft_insert_fld(char *fld_arg, int new_col_cnt, int i, t_table *tab)
 	}
 	else
 		return(ft_db_error(3, split[1]));
+	ft_arrdel2(split);
 	return (0);
 }
-

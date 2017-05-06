@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 17:11:10 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:11:12 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
 char	*ft_get_outer_str(char *buffer)
@@ -18,10 +30,8 @@ char	*ft_get_outer_str(char *buffer)
 
 char	**ft_get_args(char *buffer)
 {
-	char	*arg_str;
+	char	*arg_str, *trimmed, *bracket_pnt;
 	char	**split_args;
-	char	*bracket_pnt;
-	char	*trimmed;
 	int		i;
 
 	if (!ft_strchr(buffer, '('))
@@ -49,7 +59,7 @@ char	**ft_get_args(char *buffer)
 	return (split_args);
 }
 
-int	ft_parse_function(char *buffer, t_table *tab, char ***args)
+int		ft_parse_function(char *buffer, t_table *tab, char ***args)
 {
 	char	*table_name;
 
@@ -65,7 +75,7 @@ int	ft_parse_function(char *buffer, t_table *tab, char ***args)
 	return (0);
 }
 
-int	ft_check_str_begin(char *buffer, char *str)
+int		ft_check_str_begin(char *buffer, char *str)
 {
 	if (ft_strnequ(buffer, str, ft_strlen(str)))
 		return (1);

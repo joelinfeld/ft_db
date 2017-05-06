@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 17:11:39 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:11:40 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
-int	ft_row_str_cmp(void *thunk, const void *row1, const void *row2)
+int		ft_row_str_cmp(void *thunk, const void *row1, const void *row2)
 {
 	t_data	*val1, *val2;
 	int		fld_ind, asc_dsc;
@@ -17,7 +29,7 @@ int	ft_row_str_cmp(void *thunk, const void *row1, const void *row2)
 	return(asc_dsc * ft_strcmp(val1->str, val2->str));
 }
 
-int	ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
+int		ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
 {
 	t_data	*val1, *val2;
 	int		fld_ind, asc_dsc;
@@ -34,21 +46,22 @@ int	ft_row_int_cmp(void *thunk, const void *row1, const void *row2)
 	return(asc_dsc * (val1->i - val2->i));
 }
 
-int	ft_sort(char *buffer)
+int		ft_sort(char *buffer)
 {
 	t_table tab;
 	char	**args;
 
 	tab.name = ft_get_outer_str(buffer);
 	if (!tab.name)
-		return (ft_db_error(2, "")); //free name?
+		return (ft_db_error(2, ""));
 	if (ft_deserialize_tab(tab.name, &tab))
 		return(-1);
 	args = ft_get_args(buffer);
 	if (!args || *(args[0]) == '\0')
 		return (ft_db_error(2, ""));
 	ft_order_tab(args, &tab);
-	ft_arrdel2(args);
 	ft_serialize_tab(tab);
+	ft_free_tab(tab);
+	ft_arrdel2(args);
 	return (0);
 }

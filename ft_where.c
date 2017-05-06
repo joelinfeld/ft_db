@@ -1,26 +1,42 @@
-#include "ft_db.h" //what happens on WHERE dfsdgd (i = 2) or ORDER BY dafsf (name asc)? do a get outer str and test that for where and order by, then do args...
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_where.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 17:06:26 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:08:31 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	*ft_where(char *buffer, int *match_cnt, t_table tab)
+#include "ft_db.h"
+
+int		*ft_where(char *buffer, int *match_cnt, t_table tab)
 {
 	char	*trimmed;
 	char	**args;
 	int		arg_cnt;
 
-	trimmed = ft_strtrim(ft_strchr(buffer, ')') + 1);//do all check here
+	trimmed = ft_strtrim(ft_strchr(buffer, ')') + 1);
 	if (ft_strlen(trimmed) == 0 || ft_check_str_begin(trimmed, "ORDER BY"))
 		return (ft_all_row_inds(tab.row_cnt, match_cnt));
 	if (!ft_check_str_begin(trimmed, "WHERE"))
 		return (NULL);
 	args = ft_get_args(trimmed);
+	free(trimmed);
 	if (!args)
 		return (NULL);
 	arg_cnt = ft_arrlen2(args);
 	if (arg_cnt == 1 && ft_strequ(args[0], "*"))
+	{
+		ft_arrdel2(args);
 		return (ft_all_row_inds(tab.row_cnt, match_cnt));
-	return (ft_get_matches(tab, args, arg_cnt,  match_cnt)); //free args, trimmed
+	}
+	return (ft_get_matches(tab, args, arg_cnt,  match_cnt));
 }
 
-int	*ft_get_matches(t_table tab, char **args, int arg_cnt, int *match_cnt)
+int		*ft_get_matches(t_table tab, char **args, int arg_cnt, int *match_cnt)
 {
 	int		*row_inds;
 	char	**split;
@@ -50,10 +66,11 @@ int	*ft_get_matches(t_table tab, char **args, int arg_cnt, int *match_cnt)
 			row_inds[*match_cnt - 1] = i;
 		}
 	}
+	ft_arrdel2(args);
 	return (row_inds);
 }
 
-int ft_is_match(t_data *row_val, char *type, char *op, char *cmp_val)
+int 	ft_is_match(t_data *row_val, char *type, char *op, char *cmp_val)
 {
 	int	result;
 
@@ -83,7 +100,7 @@ int ft_is_match(t_data *row_val, char *type, char *op, char *cmp_val)
 		return (0);
 }
 
-int	*ft_all_row_inds(int row_cnt, int *match_cnt)
+int		*ft_all_row_inds(int row_cnt, int *match_cnt)
 {
 	int *row_inds;
 	int i;

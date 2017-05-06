@@ -6,7 +6,7 @@
 /*   By: jinfeld <jinfeld@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:40:03 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 14:21:25 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:42:34 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		ft_update(char	*buffer)
 {
-	t_table		tab;
-	char		**fld_args;
-	int			*fld_inds, *row_inds;
-	int			fld_cnt, row_cnt;
+	t_table	tab;
+	char	**fld_args;
+	int		*fld_inds, *row_inds;
+	int		fld_cnt, row_cnt;
 	
 	if (ft_parse_function(buffer, &tab, &fld_args) > 0)
 		return (0);
@@ -29,16 +29,17 @@ int		ft_update(char	*buffer)
 		return (ft_db_error(2, ""));
 	ft_update_rows(&tab, fld_inds, fld_cnt, row_inds, row_cnt);
 	ft_serialize_tab(tab);
+	ft_free_tab(tab);
+	ft_arrdel2(fld_args);
+	free(fld_inds);
+	free(row_inds);
 	return (0);
 }
 
-
-
-
 void	ft_update_rows(t_table *tab, int *fld_inds, int fld_cnt, int *row_inds, int row_cnt)
 {
-	char **val_args;
-	int i, j;
+	char	**val_args;
+	int		i, j;
 
 	i = 0;
 	while (i < row_cnt)
@@ -62,24 +63,24 @@ void	ft_update_rows(t_table *tab, int *fld_inds, int fld_cnt, int *row_inds, int
 				tab->rows[row_inds[i]][fld_inds[j]]->str = ft_strdup(val_args[j]);
 		}
 		i++;
+		ft_arrdel2(val_args);
 	}
 }
 
-
-
-
-
-char **ft_get_update_vals(int row_ind, int i, int row_cnt, int fld_cnt, t_table tab)
+char	**ft_get_update_vals(int row_ind, int i, int row_cnt, int fld_cnt, t_table tab)
 {
 	char	**val_args;
 	char	*buffer;
 
 	if (!tab.rows[row_ind][0])
-		ft_printf("Update (%d of %d) for %s: (null) >> ", i + 1, row_cnt, tab.flds[0].name);
+		ft_printf("Update (%d of %d) for %s: (null) >> ",
+				i + 1, row_cnt, tab.flds[0].name);
 	else if (ft_strequ(tab.flds[0].type, "str"))
-		ft_printf("Update (%d of %d) for %s: %s >> ", i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->str);
+		ft_printf("Update (%d of %d) for %s: %s >> ",
+				i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->str);
 	else if (ft_strequ(tab.flds[0].type, "int"))
-		ft_printf("Update (%d of %d) for %s: %d >> ", i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->i);
+		ft_printf("Update (%d of %d) for %s: %d >> ",
+				i + 1, row_cnt, tab.flds[0].name, tab.rows[row_ind][0]->i);
 	ft_gnl(0, &buffer);
 	val_args = ft_get_args(buffer);
 	if (!val_args || *(val_args[0]) == '\0')
@@ -89,6 +90,6 @@ char **ft_get_update_vals(int row_ind, int i, int row_cnt, int fld_cnt, t_table 
 	}
 	if (ft_wrong_arg_cnt(val_args, fld_cnt, buffer))
 		return (NULL);
+	free(buffer);
 	return (val_args);
 }
-

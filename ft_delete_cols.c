@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:36:45 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 15:19:29 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:29:42 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_delete_cols(char *buffer)
 	free(fld_inds);
 }
 
-
 void	ft_delete_column(int fld_ind, t_table *tab)
 {
 	int j;
@@ -51,13 +50,13 @@ void	ft_delete_column(int fld_ind, t_table *tab)
 			free(tab->rows[j][fld_ind]);
 		if (fld_ind != tab->col_cnt - 1)
 			tab->rows[j][fld_ind] = tab->rows[j][tab->col_cnt - 1];
-		tab->rows[j] = (t_data**)realloc(tab->rows[j], sizeof(t_data*) * (tab->col_cnt - 1));
+		tab->rows[j] = (t_data**)realloc(
+				tab->rows[j], sizeof(t_data*) * (tab->col_cnt - 1));
 	}
 	tab->flds[fld_ind] = tab->flds[tab->col_cnt - 1];
 	tab->flds = (t_field*)realloc(tab->flds, sizeof(t_field) * (tab->col_cnt - 1));
 	tab->col_cnt--;
 }
-
 
 int		ft_int_cmp(const void *a, const void *b)
 {

@@ -6,13 +6,13 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:40 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 15:32:40 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:35:11 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_db.h"
 
-int	*ft_get_col_widths(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_table tab)
+int		*ft_get_col_widths(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_table tab)
 {
 	int		*col_widths;
 	t_data	*value;
@@ -32,7 +32,7 @@ int	*ft_get_col_widths(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t
 			if (!value)
 				len = 4;
 			else if (ft_strequ(type, "int"))
-				len = ft_strlen(ft_itoa(value->i)); //free the itoa?
+				len = ft_strlen(ft_itoa(value->i));
 			else if (ft_strequ(type, "str"))
 				len = ft_strlen(value->str);
 			if (len > col_widths[i])
@@ -87,7 +87,7 @@ void	ft_display_rows(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_t
 
 	col_widths = ft_get_col_widths(fld_inds, fld_cnt, row_inds, row_cnt, tab);
 	i = -1;
-	ft_display_table_header(fld_inds, fld_cnt, col_widths, tab);///
+	ft_display_table_header(fld_inds, fld_cnt, col_widths, tab);
 	while (++i < row_cnt)
 	{
 		row = tab.rows[row_inds[i]];
@@ -104,4 +104,5 @@ void	ft_display_rows(int *fld_inds, int fld_cnt, int *row_inds, int row_cnt, t_t
 		printf("|\n");
 	}
 	ft_display_hor_line(col_widths, fld_cnt);
+	free(col_widths);
 }

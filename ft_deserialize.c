@@ -6,7 +6,7 @@
 /*   By: jinfeld <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 16:54:30 by jinfeld           #+#    #+#             */
-/*   Updated: 2017/05/05 15:25:44 by biremong         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:31:58 by biremong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_deserialize_tab(char *tab_name, t_table *tab)
 	return (0);
 }
 
-t_table		ft_deserialize_tab_data(int	fd)
+t_table	ft_deserialize_tab_data(int	fd)
 {
 	t_table tab;
 	char 	*buffer;
@@ -42,7 +42,7 @@ t_table		ft_deserialize_tab_data(int	fd)
 	return (tab);
 }
 
-char *ft_get_tab_name(char *name_data)
+char	*ft_get_tab_name(char *name_data)
 {
 	int len;
 
@@ -51,7 +51,7 @@ char *ft_get_tab_name(char *name_data)
 	return (ft_strndup(name_data, len));
 }
 
-t_field *ft_get_tab_flds(char *fld_data, int col_cnt)
+t_field	*ft_get_tab_flds(char *fld_data, int col_cnt)
 {
 	t_field *flds;
 	int 	len;
@@ -77,8 +77,7 @@ t_data	***ft_deserialize_rows(int fd, t_table tab)
 	t_data	***rows;
 	char 	*buffer;
 	char 	**split;
-	int 	i;
-	int 	j;
+	int 	i, j;
 
 	rows = (t_data***)ft_malloc(sizeof(t_data**) * tab.row_cnt);
 	i = -1;
@@ -96,9 +95,9 @@ t_data	***ft_deserialize_rows(int fd, t_table tab)
 	return (rows);
 }
 
-t_data *ft_get_value(char *type, char *cell_str)
+t_data	*ft_get_value(char *type, char *cell_str)
 {
-	t_data *value;
+	t_data	*value;
 	int 	len;
 
 	if (*cell_str == '~')

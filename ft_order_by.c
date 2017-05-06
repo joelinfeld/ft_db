@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_order_by.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: biremong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/05 17:11:01 by biremong          #+#    #+#             */
+/*   Updated: 2017/05/05 17:11:02 by biremong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_db.h"
 
-int	ft_order_tab(char **args, t_table *tab)
+int		ft_order_tab(char **args, t_table *tab)
 {
 	char	**split;
 	int		fld_ind, thunk;
@@ -23,10 +35,11 @@ int	ft_order_tab(char **args, t_table *tab)
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_str_cmp);
 	else if (ft_strequ(tab->flds[fld_ind].type, "int"))
 		qsort_r(tab->rows, tab->row_cnt, sizeof(t_data**), &thunk, ft_row_int_cmp);
+	ft_arrdel2(split);
 	return (0);
 }
 
-int	ft_order_by(char *buffer, t_table *tab)
+int		ft_order_by(char *buffer, t_table *tab)
 {
 	char	*bracket_pnt;
 	char	*trimmed;
@@ -44,5 +57,7 @@ int	ft_order_by(char *buffer, t_table *tab)
 	if (!args || ft_arrlen2(args) != 1)
 		return (-1);
 	ft_order_tab(args, tab);
+	free(trimmed);
+	ft_arrdel2(args);
 	return (0);
 }
